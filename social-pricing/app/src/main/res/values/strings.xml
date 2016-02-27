@@ -14,6 +14,7 @@
     <string name="location_desc">Location</string>
     <string name="favorite_desc">Favorite</string>
     <string name="search_desc">Search</string>
+    <string name="new_desc">New</string>
 
     <!-- Info -->
     <string name="search_by_location_title">Search by Location</string>
@@ -24,5 +25,8 @@
 
     <string name="search_by_search_title">Search by Address</string>
     <string name="search_by_search_desc">You can search a market from by address here.</string>
+
+    <string name="new_title">Add new Market</string>
+    <string name="panel_new_desc">You can add a market touching here.</string>
 
 </resources>
