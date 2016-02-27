@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Search Page -->
+    <color name="pink_panel">#e91e63</color>
+    <color name="yellow_panel">#ffc107</color>
+    <color name="blue_panel">#2196f3</color>
+    <color name="green_panel">#4caf50</color>
+
+    <!-- Text -->
+    <color name="pink_text_desc">#f8bbd0</color>
+    <color name="yellow_text_desc">#ffecb3</color>
+</resources>

@@ -12,9 +12,12 @@
 
     <!-- Content description -->
     <string name="location_desc">Location</string>
+    <string name="favorite_desc">Favorite</string>
 
     <!-- Info -->
     <string name="search_by_location_title">Search by Location</string>
     <string name="search_by_location_desc">You can search a market using your location touching here.</string>
+    <string name="search_by_favorite_title">Search Favorites</string>
+    <string name="search_by_favorite_desc">You can search a market from your favorites here.</string>
 
 </resources>

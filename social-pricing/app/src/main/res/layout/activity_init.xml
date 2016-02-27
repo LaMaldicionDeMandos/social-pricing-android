@@ -13,14 +13,14 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:layout_weight="1"
-        android:background="#e91e63"
+        android:background="@color/pink_panel"
         style="@style/TextAppearance.AppCompat.Title">
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:id="@+id/imageView"
-            android:layout_gravity="left"
+            android:layout_width="@dimen/default_icon"
+            android:layout_height="@dimen/default_icon"
+            android:id="@+id/locationIcon"
+            android:layout_margin="@dimen/item_margin"
             android:background="@drawable/ic_location_on_white_36dp"
             android:contentDescription="@string/location_desc"
             android:layout_centerVertical="true"
@@ -30,27 +30,66 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
+            style="@style/TitleTextWhite"
             android:text="@string/search_by_location_title"
-            android:id="@+id/textView"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_above="@+id/imageView"
+            android:id="@+id/locationTitle"
+            android:layout_toRightOf="@+id/locationIcon"
+            android:layout_toEndOf="@+id/locationIcon"
+            android:layout_above="@+id/locationIcon"
          />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            style="@style/DescText"
             android:text="@string/search_by_location_desc"
-            android:textStyle="bold"
-            android:textColor="#727272"
-            android:id="@+id/textView2"
+            android:textColor="@color/pink_text_desc"
+            android:id="@+id/locationDesc"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView" />
+            android:layout_alignLeft="@+id/locationTitle"
+            android:layout_alignStart="@+id/locationTitle" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_weight="1"
+        android:background="@color/yellow_panel">
+        <ImageView
+            android:layout_width="@dimen/default_icon"
+            android:layout_height="@dimen/default_icon"
+            android:id="@+id/favoriteIcon"
+            android:layout_margin="@dimen/item_margin"
+            android:background="@drawable/ic_favorite_white_36dp"
+            android:contentDescription="@string/favorite_desc"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TitleTextWhite"
+            android:text="@string/search_by_favorite_title"
+            android:id="@+id/favoriteTitle"
+            android:layout_toRightOf="@+id/favoriteIcon"
+            android:layout_toEndOf="@+id/favoriteIcon"
+            android:layout_above="@+id/favoriteIcon"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/DescText"
+            android:text="@string/search_by_favorite_desc"
+            android:textColor="@color/yellow_text_desc"
+            android:id="@+id/favoriteDesc"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/favoriteTitle"
+            android:layout_alignStart="@+id/favoriteTitle" />
     </RelativeLayout>
     <FrameLayout
         android:layout_width="match_parent"
@@ -60,7 +99,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:layout_weight="1"
-        android:background="#ffc107">
+        android:background="@color/blue_panel">
     </FrameLayout>
     <FrameLayout
         android:layout_width="match_parent"
@@ -70,16 +109,6 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:layout_weight="1"
-        android:background="#2196f3">
-    </FrameLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="1"
-        android:background="#4caf50">
+        android:background="@color/green_panel">
     </FrameLayout>
 </LinearLayout>
