@@ -1,8 +1,19 @@
 <resources>
-    <string name="app_name">Precios Sociales</string>
 
+    <!-- Titles -->
+    <string name="app_name">Precios Sociales</string>
+    <string name="market_search">Búsca un Negocio</string>
+
+    <!-- Menu -->
     <string name="action_settings">Configuración</string>
 
     <!-- Buttons -->
     <string name="start_tracking">Iniciar</string>
+
+    <!-- Content description -->
+    <string name="location_desc">Locación</string>
+
+    <!-- Info -->
+    <string name="search_by_location_title">Buscar en mi ubicacón</string>
+    <string name="search_by_location_desc">Puedes buscar un negocio usando tu ubicación tocando aquí.</string>
 </resources>

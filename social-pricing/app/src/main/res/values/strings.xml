@@ -1,9 +1,20 @@
 <resources>
-    <string name="app_name">Social Pricing</string>
 
+    <!-- Titles -->
+    <string name="app_name">Social Pricing</string>
+    <string name="market_search">Search a Market</string>
+
+    <!-- Menu -->
     <string name="action_settings">Settings</string>
 
     <!-- Buttons -->
     <string name="start_tracking">Start</string>
+
+    <!-- Content description -->
+    <string name="location_desc">Location</string>
+
+    <!-- Info -->
+    <string name="search_by_location_title">Search by Location</string>
+    <string name="search_by_location_desc">You can search a market using your location touching here.</string>
 
 </resources>

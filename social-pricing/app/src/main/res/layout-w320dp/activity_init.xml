@@ -17,8 +17,8 @@
         style="@style/TextAppearance.AppCompat.Title">
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:id="@+id/imageView"
             android:layout_gravity="left"
             android:background="@drawable/ic_location_on_white_36dp"
@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:text="@string/search_by_location_title"
@@ -43,14 +43,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:text="@string/search_by_location_desc"
             android:textStyle="bold"
             android:textColor="#727272"
             android:id="@+id/textView2"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView" />
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView" />
     </RelativeLayout>
     <FrameLayout
         android:layout_width="match_parent"
