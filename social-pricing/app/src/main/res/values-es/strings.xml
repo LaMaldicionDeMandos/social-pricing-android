@@ -13,10 +13,15 @@
     <!-- Content description -->
     <string name="location_desc">Locación</string>
     <string name="favorite_desc">Favorito</string>
+    <string name="search_desc">Búscar</string>
 
     <!-- Info -->
     <string name="search_by_location_title">Buscar en mi ubicacón</string>
     <string name="search_by_location_desc">Puedes buscar un negocio usando tu ubicación tocando aquí.</string>
+
     <string name="search_by_favorite_title">Buscar mis favoritos</string>
-    <string name="search_by_favorite_desc">Puedes buscar un negocio entre tus favoritos tocando aquí.</string>
+    <string name="search_by_favorite_desc">Puedes buscar un negocio entre tus favoritos aquí.</string>
+
+    <string name="search_by_search_title">Buscar desde la Dirección</string>
+    <string name="search_by_search_desc">Puedes buscar un negocio si sabes la dirección.</string>
 </resources>
