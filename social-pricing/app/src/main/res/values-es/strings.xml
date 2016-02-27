@@ -2,4 +2,7 @@
     <string name="app_name">Precios Sociales</string>
 
     <string name="action_settings">Configuración</string>
+
+    <!-- Buttons -->
+    <string name="start_tracking">Iniciar</string>
 </resources>
