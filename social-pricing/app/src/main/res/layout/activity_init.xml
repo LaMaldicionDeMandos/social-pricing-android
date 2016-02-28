@@ -51,17 +51,18 @@
 
         <Button
             style="?android:attr/borderlessButtonStyle"
+            android:paddingBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
             android:id="@+id/locationButton"
-            android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/locationDesc"
             android:layout_alignEnd="@+id/locationDesc"
             android:textSize="@dimen/small_button"
             android:textStyle="bold"
             android:textColor="@color/flat_button"
-            android:layout_below="@+id/locationDesc" />
+            android:layout_below="@+id/locationDesc"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
     <RelativeLayout
@@ -102,9 +103,24 @@
             android:text="@string/search_by_favorite_desc"
             android:textColor="@color/yellow_text_desc"
             android:id="@+id/favoriteDesc"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/favoriteTitle"
-            android:layout_alignStart="@+id/favoriteTitle" />
+            android:layout_alignTop="@+id/favoriteIcon"
+            android:layout_toRightOf="@+id/favoriteIcon"
+            android:layout_toEndOf="@+id/favoriteIcon" />
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:id="@+id/favoriteButton"
+            android:layout_alignRight="@+id/favoriteDesc"
+            android:layout_alignEnd="@+id/favoriteDesc"
+            android:textSize="@dimen/small_button"
+            android:textStyle="bold"
+            android:textColor="@color/flat_button"
+            android:layout_below="@+id/favoriteDesc"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
