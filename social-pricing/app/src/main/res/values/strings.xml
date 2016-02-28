@@ -4,12 +4,18 @@
     <string name="app_name">Social Pricing</string>
     <string name="market_search">Search a Market</string>
 
+    <!-- MEssages -->
+    <string name="no_market_location">There is no Market, do you want to add one?\n
+    Also, you can search it with another method.</string>
+
     <!-- Menu -->
     <string name="action_settings">Settings</string>
 
     <!-- Buttons -->
     <string name="search">SEARCH</string>
     <string name="new_button">NEW</string>
+    <string name="add">ADD</string>
+    <string name="discard">DISCARD</string>
 
     <!-- Content description -->
     <string name="location_desc">Location</string>

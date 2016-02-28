@@ -2,7 +2,11 @@
 
     <!-- Titles -->
     <string name="app_name">Precios Sociales</string>
-    <string name="market_search">Búsca un Negocio</string>
+    <string name="market_search">Búsca un Mercado</string>
+
+    <!-- MEssages -->
+    <string name="no_market_location">No se encrontraron Mercados, quieres agregar uno?\n
+    Si no, puedes búscar uno con otro metodo.</string>
 
     <!-- Menu -->
     <string name="action_settings">Configuración</string>
@@ -10,6 +14,8 @@
     <!-- Buttons -->
     <string name="search">BUSCAR</string>
     <string name="new_button">NUEVO</string>
+    <string name="add">Nuevo</string>
+    <string name="discard">DESCARTAR</string>
 
     <!-- Content description -->
     <string name="location_desc">Locación</string>
