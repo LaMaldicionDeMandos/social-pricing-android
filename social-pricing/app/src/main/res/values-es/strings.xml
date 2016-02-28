@@ -2,11 +2,10 @@
 
     <!-- Titles -->
     <string name="app_name">Precios Sociales</string>
-    <string name="market_search">Búsca un Mercado</string>
+    <string name="market_search">Busca un Mercado</string>
 
     <!-- MEssages -->
-    <string name="no_market_location">No se encrontraron Mercados, quieres agregar uno?\n
-    Si no, puedes búscar uno con otro metodo.</string>
+    <string name="no_market_location">No se encrontraron Mercados en tu ubicación, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
 
     <!-- Menu -->
     <string name="action_settings">Configuración</string>
@@ -20,7 +19,7 @@
     <!-- Content description -->
     <string name="location_desc">Locación</string>
     <string name="favorite_desc">Favorito</string>
-    <string name="search_desc">Búscar</string>
+    <string name="search_desc">Buscar</string>
     <string name="new_desc">Nuevo</string>
 
     <!-- Info -->

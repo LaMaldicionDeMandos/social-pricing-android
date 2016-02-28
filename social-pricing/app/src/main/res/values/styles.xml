@@ -3,6 +3,12 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/green_panel</item>
+        <item name="colorAccent">#FF5722</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColor">#212121</item>
     </style>
 
     <style name="PinkButton" parent="Base.V21.Theme.AppCompat.Light">
