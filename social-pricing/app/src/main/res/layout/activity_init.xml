@@ -160,9 +160,23 @@
             android:text="@string/search_by_search_desc"
             android:textColor="@color/blue_text_desc"
             android:id="@+id/searchDesc"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/searchTitle"
-            android:layout_alignStart="@+id/searchTitle" />
+            android:layout_alignTop="@+id/searchIcon"
+            android:layout_toRightOf="@+id/searchIcon"
+            android:layout_toEndOf="@+id/searchIcon" />
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:id="@+id/searchButton"
+            android:layout_alignRight="@+id/searchDesc"
+            android:layout_alignEnd="@+id/searchDesc"
+            android:textSize="@dimen/small_button"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_below="@+id/searchDesc"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
