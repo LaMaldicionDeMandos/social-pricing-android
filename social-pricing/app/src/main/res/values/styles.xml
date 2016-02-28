@@ -5,6 +5,30 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="PinkButton" parent="Base.V21.Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/pink_button</item>
+        <item name="colorControlHighlight">@color/pink_button_highlight</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="YellowButton" parent="Base.V21.Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/yellow_button</item>
+        <item name="colorControlHighlight">@color/yellow_button_highlight</item>
+        <item name="android:textColor">@color/blue_grey</item>
+    </style>
+
+    <style name="BlueButton" parent="Base.V21.Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/blue_button</item>
+        <item name="colorControlHighlight">@color/blue_button_highlight</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="GreenButton" parent="Base.V21.Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/green_button</item>
+        <item name="colorControlHighlight">@color/green_button_highlight</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
     <style name="TitleTextWhite" parent="Theme.AppCompat.Light">
         <item name="android:textSize">@dimen/text_title</item>
         <item name="android:textStyle">bold</item>

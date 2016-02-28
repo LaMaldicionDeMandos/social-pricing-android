@@ -6,10 +6,24 @@
     <color name="blue_panel">#2196f3</color>
     <color name="green_panel">#4caf50</color>
 
+    <!-- Buttons -->
+    <color name="pink_button">#ff4081</color>
+    <color name="pink_button_highlight">#c2185b</color>
+
+    <color name="yellow_button">#ffeb3b</color>
+    <color name="yellow_button_highlight">#ffa000</color>
+
+    <color name="blue_button">#03a9f4</color>
+    <color name="blue_button_highlight">#1976d2</color>
+
+    <color name="green_button">#8bc34a</color>
+    <color name="green_button_highlight">#388e3c</color>
+
     <!-- Text -->
     <color name="pink_text_desc">#f8bbd0</color>
     <color name="yellow_text_desc">#ffecb3</color>
     <color name="blue_text_desc">#bbdefb</color>
     <color name="green_text_desc">#c8e6c9</color>
     <color name="flat_button">#1e94f2</color>
+    <color name="blue_grey">#607d8b</color>
 </resources>

@@ -50,19 +50,16 @@
             android:layout_toEndOf="@+id/locationIcon" />
 
         <Button
-            style="?android:attr/borderlessButtonStyle"
-            android:paddingBottom="10dp"
+            android:theme="@style/PinkButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
             android:id="@+id/locationButton"
-            android:layout_alignRight="@+id/locationDesc"
-            android:layout_alignEnd="@+id/locationDesc"
             android:textSize="@dimen/small_button"
             android:textStyle="bold"
-            android:textColor="@color/flat_button"
-            android:layout_below="@+id/locationDesc"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
     <RelativeLayout
@@ -108,19 +105,16 @@
             android:layout_toEndOf="@+id/favoriteIcon" />
 
         <Button
-            style="?android:attr/borderlessButtonStyle"
-            android:paddingBottom="10dp"
+            android:theme="@style/YellowButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
             android:id="@+id/favoriteButton"
-            android:layout_alignRight="@+id/favoriteDesc"
-            android:layout_alignEnd="@+id/favoriteDesc"
             android:textSize="@dimen/small_button"
             android:textStyle="bold"
-            android:textColor="@color/flat_button"
-            android:layout_below="@+id/favoriteDesc"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -164,19 +158,16 @@
             android:layout_toRightOf="@+id/searchIcon"
             android:layout_toEndOf="@+id/searchIcon" />
         <Button
-            style="?android:attr/borderlessButtonStyle"
-            android:paddingBottom="10dp"
+            android:theme="@style/BlueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
             android:id="@+id/searchButton"
-            android:layout_alignRight="@+id/searchDesc"
-            android:layout_alignEnd="@+id/searchDesc"
             android:textSize="@dimen/small_button"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:layout_below="@+id/searchDesc"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -216,8 +207,20 @@
             android:text="@string/panel_new_desc"
             android:textColor="@color/green_text_desc"
             android:id="@+id/newDesc"
-            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/newIcon"
             android:layout_alignLeft="@+id/newTitle"
             android:layout_alignStart="@+id/newTitle" />
+
+        <Button
+            android:theme="@style/GreenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_button"
+            android:id="@+id/newButton"
+            android:textSize="@dimen/small_button"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </LinearLayout>

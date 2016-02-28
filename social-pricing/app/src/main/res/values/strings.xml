@@ -9,6 +9,7 @@
 
     <!-- Buttons -->
     <string name="search">SEARCH</string>
+    <string name="new_button">NEW</string>
 
     <!-- Content description -->
     <string name="location_desc">Location</string>

@@ -8,7 +8,8 @@
     <string name="action_settings">Configuración</string>
 
     <!-- Buttons -->
-    <string name="search">Buscar</string>
+    <string name="search">BUSCAR</string>
+    <string name="new_button">NUEVO</string>
 
     <!-- Content description -->
     <string name="location_desc">Locación</string>
