@@ -17,12 +17,16 @@ import android.widget.Toast;
 
 public class InitActivity extends AppCompatActivity {
     public final static String LOCATION_EVENT = "location_event";
+    public final static String FAVORITE_EVENT = "favorite_event";
+    public final static String SEARCH_EVENT = "search_event";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init);
         View locationButton = findViewById(R.id.locationButton);
+        View favoriteButton = findViewById(R.id.favoriteButton);
+        View searchButton = findViewById(R.id.searchButton);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,13 +36,37 @@ public class InitActivity extends AppCompatActivity {
                 LocalBroadcastManager.getInstance(InitActivity.this).sendBroadcast(intent);
             }
         });
+        favoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Por ahora mockeo la llamada al servicio
+                Intent intent = new Intent(FAVORITE_EVENT);
+                intent.putExtra("data", new Parcelable[]{});
+                LocalBroadcastManager.getInstance(InitActivity.this).sendBroadcast(intent);
+            }
+        });
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Por ahora mockeo la llamada al servicio
+                Intent intent = new Intent(SEARCH_EVENT);
+                intent.putExtra("data", new Parcelable[]{});
+                LocalBroadcastManager.getInstance(InitActivity.this).sendBroadcast(intent);
+            }
+        });
         LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver,
                 new IntentFilter(LOCATION_EVENT));
+        LocalBroadcastManager.getInstance(this).registerReceiver(favoriteReceiver,
+                new IntentFilter(FAVORITE_EVENT));
+        LocalBroadcastManager.getInstance(this).registerReceiver(searchReceiver,
+                new IntentFilter(SEARCH_EVENT));
     }
 
     @Override
     protected void onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(locationReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(favoriteReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(searchReceiver);
         super.onDestroy();
     }
 
@@ -65,25 +93,45 @@ public class InitActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void showEmptyDialog(int messageId) {
+        new AlertDialog.Builder(InitActivity.this)
+                .setMessage(messageId)
+                .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Toast.makeText(InitActivity.this, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+    }
+
     private final BroadcastReceiver locationReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            new AlertDialog.Builder(InitActivity.this)
-                    .setMessage(R.string.no_market_location)
-                    .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            Toast.makeText(InitActivity.this, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).create().show();
+            showEmptyDialog(R.string.no_market_location);
+        }
+    };
+
+    private final BroadcastReceiver searchReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            showEmptyDialog(R.string.no_market_search);
+        }
+    };
+
+    private final BroadcastReceiver favoriteReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            showEmptyDialog(R.string.no_market_favorite);
         }
     };
 }

@@ -6,6 +6,8 @@
 
     <!-- Messages -->
     <string name="no_market_location">There is no Market in your location, do you want to add one?\nAlso, you can search it with another method.</string>
+    <string name="no_market_favorite">There is no Market in your favorites, do you want to add one?\nAlso, you can search it with another method.</string>
+    <string name="no_market_search">There is no Market that match with your search, do you want to add one?\nAlso, you can search it with another method.</string>
 
     <!-- Menu -->
     <string name="action_settings">Settings</string>

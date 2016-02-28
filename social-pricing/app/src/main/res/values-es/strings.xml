@@ -6,6 +6,8 @@
 
     <!-- MEssages -->
     <string name="no_market_location">No se encrontraron Mercados en tu ubicación, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
+    <string name="no_market_favorite">No se encrontraron Mercados en tus favoritos, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
+    <string name="no_market_search">No se encrontraron Mercados en tu busqueda, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
 
     <!-- Menu -->
     <string name="action_settings">Configuración</string>
