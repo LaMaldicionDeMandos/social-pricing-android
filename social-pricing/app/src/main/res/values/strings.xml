@@ -8,7 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- Buttons -->
-    <string name="start_tracking">Start</string>
+    <string name="search">SEARCH</string>
 
     <!-- Content description -->
     <string name="location_desc">Location</string>

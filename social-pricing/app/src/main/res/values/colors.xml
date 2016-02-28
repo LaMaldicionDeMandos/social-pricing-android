@@ -11,4 +11,5 @@
     <color name="yellow_text_desc">#ffecb3</color>
     <color name="blue_text_desc">#bbdefb</color>
     <color name="green_text_desc">#c8e6c9</color>
+    <color name="flat_button">#1e94f2</color>
 </resources>

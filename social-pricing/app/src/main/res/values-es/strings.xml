@@ -8,12 +8,13 @@
     <string name="action_settings">Configuración</string>
 
     <!-- Buttons -->
-    <string name="start_tracking">Iniciar</string>
+    <string name="search">Buscar</string>
 
     <!-- Content description -->
     <string name="location_desc">Locación</string>
     <string name="favorite_desc">Favorito</string>
     <string name="search_desc">Búscar</string>
+    <string name="new_desc">Nuevo</string>
 
     <!-- Info -->
     <string name="search_by_location_title">Buscar en mi ubicacón</string>
@@ -24,4 +25,7 @@
 
     <string name="search_by_search_title">Buscar desde la Dirección</string>
     <string name="search_by_search_desc">Puedes buscar un negocio si sabes la dirección.</string>
+
+    <string name="new_title">Nuevo Negocio</string>
+    <string name="panel_new_desc">Puedes agregar un Negocio tocando aquí.</string>
 </resources>

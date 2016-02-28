@@ -45,9 +45,24 @@
             android:text="@string/search_by_location_desc"
             android:textColor="@color/pink_text_desc"
             android:id="@+id/locationDesc"
+            android:layout_alignTop="@+id/locationIcon"
+            android:layout_toRightOf="@+id/locationIcon"
+            android:layout_toEndOf="@+id/locationIcon" />
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:id="@+id/locationButton"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/locationTitle"
-            android:layout_alignStart="@+id/locationTitle" />
+            android:layout_alignRight="@+id/locationDesc"
+            android:layout_alignEnd="@+id/locationDesc"
+            android:textSize="@dimen/small_button"
+            android:textStyle="bold"
+            android:textColor="@color/flat_button"
+            android:layout_below="@+id/locationDesc" />
+
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
