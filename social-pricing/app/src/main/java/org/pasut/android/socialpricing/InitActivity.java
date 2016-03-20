@@ -111,6 +111,26 @@ public class InitActivity extends AppCompatActivity {
                 }).create().show();
     }
 
+    private void showSearchByAddressDiaglo() {
+        new AlertDialog.Builder(InitActivity.this)
+                .setTitle(R.string.search_by_search_title)
+                .setMessage(R.string.search_by_address_explanation)
+                .setView(R.layout.address_search_dialog)
+                .setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Toast.makeText(InitActivity.this, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+    }
+
     private final BroadcastReceiver locationReceiver = new BroadcastReceiver() {
 
         @Override
@@ -123,7 +143,7 @@ public class InitActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            showEmptyDialog(R.string.no_market_search);
+            showSearchByAddressDiaglo();
         }
     };
 

@@ -4,10 +4,11 @@
     <string name="app_name">Precios Sociales</string>
     <string name="market_search">Busca un Mercado</string>
 
-    <!-- MEssages -->
+    <!-- Messages -->
     <string name="no_market_location">No se encrontraron Mercados en tu ubicación, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
     <string name="no_market_favorite">No se encrontraron Mercados en tus favoritos, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
     <string name="no_market_search">No se encrontraron Mercados en tu busqueda, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
+    <string name="search_by_address_explanation">Introduce la dirección incluida la altura y luego la localidad.</string>
 
     <!-- Menu -->
     <string name="action_settings">Configuración</string>
@@ -23,6 +24,10 @@
     <string name="favorite_desc">Favorito</string>
     <string name="search_desc">Buscar</string>
     <string name="new_desc">Nuevo</string>
+
+    <!-- hints -->
+    <string name="address">Dirección</string>
+    <string name="locale">Localidad</string>
 
     <!-- Info -->
     <string name="search_by_location_title">Buscar en mi ubicacón</string>
