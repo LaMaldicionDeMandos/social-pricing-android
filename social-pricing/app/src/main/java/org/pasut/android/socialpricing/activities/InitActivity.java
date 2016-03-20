@@ -1,4 +1,4 @@
-package org.pasut.socialpricing.activities;
+package org.pasut.android.socialpricing.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,11 +16,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import org.pasut.android.socialpricing.R;
-import org.pasut.socialpricing.services.MarketService;
+import org.pasut.android.socialpricing.services.MarketService;
 
-import static org.pasut.socialpricing.services.MarketService.FAVORITE_SEARCH_EVENT;
-import static org.pasut.socialpricing.services.MarketService.LOCATION_SEARCH_EVENT;
-import static org.pasut.socialpricing.services.MarketService.SEARCH_SEARCH_EVENT;
+import static org.pasut.android.socialpricing.services.MarketService.FAVORITE_SEARCH_EVENT;
+import static org.pasut.android.socialpricing.services.MarketService.LOCATION_SEARCH_EVENT;
+import static org.pasut.android.socialpricing.services.MarketService.SEARCH_SEARCH_EVENT;
 
 public class InitActivity extends AppCompatActivity {
     private MarketService marketService;

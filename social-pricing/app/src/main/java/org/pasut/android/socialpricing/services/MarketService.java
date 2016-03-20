@@ -1,4 +1,4 @@
-package org.pasut.socialpricing.services;
+package org.pasut.android.socialpricing.services;
 
 import android.content.Context;
 import android.content.Intent;
