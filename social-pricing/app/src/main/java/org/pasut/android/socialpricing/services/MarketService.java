@@ -1,5 +1,6 @@
 package org.pasut.android.socialpricing.services;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -18,6 +19,7 @@ public class MarketService {
     private Context context;
 
     public MarketService(final Context context) {
+        
         this.context = Preconditions.checkNotNull(context);
     }
 

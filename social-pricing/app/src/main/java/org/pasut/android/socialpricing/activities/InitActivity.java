@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.pasut.android.socialpricing.R;
@@ -117,16 +118,18 @@ public class InitActivity extends AppCompatActivity {
     }
 
     private void showSearchByAddressDiaglo() {
+        final View dialogView = this.getLayoutInflater().inflate(R.layout.address_search_dialog, null);
         new AlertDialog.Builder(InitActivity.this)
                 .setTitle(R.string.search_by_search_title)
                 .setMessage(R.string.search_by_address_explanation)
-                .setView(R.layout.address_search_dialog)
+                .setView(dialogView)
                 .setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        //TODO Como obtengo los valores de los cuadros de texto?
-                        marketService.searchByAddress("Bla", "Ble");
+                        TextView address = (TextView)dialogView.findViewById(R.id.address);
+                        TextView locale = (TextView)dialogView.findViewById(R.id.locale);
+                        marketService.searchByAddress(address.getText().toString(), locale.getText().toString());
                     }
                 })
                 .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
