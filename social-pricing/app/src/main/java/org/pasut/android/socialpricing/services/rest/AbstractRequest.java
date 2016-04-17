@@ -1,5 +1,6 @@
 package org.pasut.android.socialpricing.services.rest;
 
+import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest;
 
 /**
@@ -18,5 +19,9 @@ public abstract class AbstractRequest<T> extends GoogleHttpClientSpiceRequest<T>
 
     public String cacheKey() {
         return path;
+    }
+
+    public long cacheDuration() {
+        return DurationInMillis.ONE_DAY;
     }
 }

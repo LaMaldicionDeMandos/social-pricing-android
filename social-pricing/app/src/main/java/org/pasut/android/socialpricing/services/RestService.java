@@ -8,6 +8,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
 import org.pasut.android.socialpricing.services.rest.AbstractRequest;
+import org.pasut.android.socialpricing.services.rest.MarketsByAddressRequest;
 
 import java.util.List;
 
@@ -31,11 +32,11 @@ public class RestService {
     }
 
     private <T> void executeRequest(AbstractRequest<T> request, RequestListener<T> listener) {
-        spice.execute(request, request.cacheKey(), ONE_DAY, listener);
+        spice.execute(request, request.cacheKey(), request.cacheDuration(), listener);
     }
 
     public void marketsByAddress(final String address, final String locale,
                                  final RequestListener<List<Market>> listener) {
-
+        executeRequest(new MarketsByAddressRequest(protocol, host, port, address, locale), listener);
     }
 }
