@@ -7,11 +7,16 @@ import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpice
  */
 public abstract class AbstractRequest<T> extends GoogleHttpClientSpiceRequest<T> {
     protected final String url;
+    protected final String path;
 
-    public AbstractRequest(final String protocol, final String host, final int port, final Class<T> clazz) {
+    public AbstractRequest(final String protocol, final String host, final int port,
+                           final String path, final Class<T> clazz) {
         super(clazz);
         this.url = protocol + host + ":" + port + "/";
+        this.path = this.url + path;
     }
 
-    public abstract String cacheKey();
+    public String cacheKey() {
+        return path;
+    }
 }
