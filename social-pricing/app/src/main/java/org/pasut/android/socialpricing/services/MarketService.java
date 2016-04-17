@@ -1,19 +1,27 @@
 package org.pasut.android.socialpricing.services;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
+import com.google.api.client.util.Lists;
 import com.google.common.base.Preconditions;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.pasut.android.socialpricing.SocialPriceApplication;
+import org.pasut.android.socialpricing.model.Market;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by boot on 3/20/16.
  */
 public class MarketService {
+    private final static String TAG = MarketService.class.getSimpleName();
     public final static String LOCATION_SEARCH_EVENT = "location_event";
     public final static String FAVORITE_SEARCH_EVENT = "favorite_event";
     public final static String SEARCH_SEARCH_EVENT = "search_event";
@@ -28,9 +36,23 @@ public class MarketService {
     }
 
     public void searchByAddress(final String address, final String locale) {
-        //TODO Implement request ya tengo el rest service, solo tengo que implementar la llamada
-        Intent intent = new Intent(SEARCH_SEARCH_EVENT);
-        intent.putExtra("data", new Parcelable[]{});
+        restService.marketsByAddress(address, locale, new RequestListener<List<Market>>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+                Log.e(TAG, "Searching Markets: " + spiceException.getMessage());
+                sendList(SEARCH_SEARCH_EVENT, new ArrayList<Market>());
+            }
+
+            @Override
+            public void onRequestSuccess(List<Market> markets) {
+                sendList(SEARCH_SEARCH_EVENT, markets);
+            }
+        });
+    }
+
+    private void sendList(final String event, List<Market> list) {
+        final Intent intent = new Intent(event);
+        intent.putExtra("data", list.toArray(new Parcelable[]{}));
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
