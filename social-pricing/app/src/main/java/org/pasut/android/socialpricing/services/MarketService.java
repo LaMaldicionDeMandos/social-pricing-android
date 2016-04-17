@@ -32,6 +32,7 @@ public class MarketService {
     public MarketService(final Context context) {
         SocialPriceApplication app = (SocialPriceApplication) context.getApplicationContext();
         this.restService = app.getRestService();
+        this.restService.start(context);
         this.context = Preconditions.checkNotNull(context);
     }
 
@@ -52,12 +53,13 @@ public class MarketService {
 
     private void sendList(final String event, List<Market> list) {
         final Intent intent = new Intent(event);
-        intent.putExtra("data", list.toArray(new Parcelable[]{}));
+        intent.putParcelableArrayListExtra("data", (ArrayList<? extends Parcelable>) list);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     public void destroy() {
         this.context = null;
+        this.restService.shouldStop();
         this.restService = null;
     }
 }

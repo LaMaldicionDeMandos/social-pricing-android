@@ -26,4 +26,5 @@
     <color name="green_text_desc">#c8e6c9</color>
     <color name="flat_button">#1e94f2</color>
     <color name="blue_grey">#607d8b</color>
+    <color name="edit_text">#212121</color>
 </resources>

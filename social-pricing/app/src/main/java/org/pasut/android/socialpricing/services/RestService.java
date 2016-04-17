@@ -39,4 +39,12 @@ public class RestService {
                                  final RequestListener<List<Market>> listener) {
         executeRequest(new MarketsByAddressRequest(protocol, host, port, address, locale), listener);
     }
+
+    public void start(final Context context) {
+        spice.start(context);
+    }
+
+    public void shouldStop() {
+        spice.shouldStop();
+    }
 }

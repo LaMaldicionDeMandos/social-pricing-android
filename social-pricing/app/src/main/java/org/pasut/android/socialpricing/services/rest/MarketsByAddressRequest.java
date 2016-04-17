@@ -14,7 +14,7 @@ import java.util.List;
  * Created by boot on 4/17/16.
  */
 public class MarketsByAddressRequest extends AbstractRequest<List<Market>> {
-    private final static String TEMPLATE = "market/address?address=%s&local=%s";
+    private final static String TEMPLATE = "market/address?address=%s&locale=%s";
     private final static Class<List<Market>> getClazz() {
         List<Market> list = Lists.newArrayList();
         return (Class<List<Market>>)list.getClass();
