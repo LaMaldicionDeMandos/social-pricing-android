@@ -17,7 +17,7 @@ public class SocialPriceApplication extends Application {
     public void onCreate() {
         super.onCreate();
         SpiceManager spiceManager = new SpiceManager(RestSpiceService.class);
-        restService = new RestService(spiceManager);
+        restService = new RestService(spiceManager, this);
     }
 
     public RestService getRestService() {

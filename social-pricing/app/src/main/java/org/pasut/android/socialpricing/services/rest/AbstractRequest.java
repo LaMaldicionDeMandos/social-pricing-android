@@ -12,7 +12,7 @@ public abstract class AbstractRequest<T> extends GoogleHttpClientSpiceRequest<T>
     public AbstractRequest(final String protocol, final String host, final int port,
                            final String path, final Class<T> clazz) {
         super(clazz);
-        this.url = protocol + host + ":" + port + "/";
+        this.url = protocol + "://" + host + ":" + port + "/";
         this.path = this.url + path;
     }
 
