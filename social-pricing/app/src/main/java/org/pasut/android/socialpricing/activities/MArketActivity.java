@@ -28,6 +28,18 @@ import static org.pasut.android.socialpricing.services.MarketService.SEARCH_SEAR
 
 public class MarketActivity extends AppCompatActivity {
     private MarketService marketService;
+
+    interface CreateMarketStrategy {
+        void execute(Context context);
+    }
+
+    class ManualCreateMarketStrategy implements CreateMarketStrategy {
+
+        @Override
+        public void execute(Context context) {
+            Toast.makeText(context, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,14 +114,14 @@ public class MarketActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showEmptyDialog(int messageId) {
+    private void showEmptyDialog(final int messageId, final CreateMarketStrategy strategy) {
         new AlertDialog.Builder(MarketActivity.this)
                 .setMessage(messageId)
                 .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Toast.makeText(MarketActivity.this, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
+                        strategy.execute(MarketActivity.this);
                     }
                 })
                 .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
@@ -147,7 +159,12 @@ public class MarketActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            showEmptyDialog(R.string.no_market_location);
+            showEmptyDialog(R.string.no_market_location, new CreateMarketStrategy() {
+                @Override
+                public void execute(Context context) {
+
+                }
+            });
         }
     };
 
@@ -157,7 +174,7 @@ public class MarketActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             List<Market> markets = intent.getExtras().getParcelableArrayList("data");
             if (markets.isEmpty()) {
-                showEmptyDialog(R.string.no_market_location);
+                showEmptyDialog(R.string.no_market_location, new ManualCreateMarketStrategy());
             } else if (markets.size() == 1) {
                 //TODO ir directamente a la siguiente activity con el market.
             } else {
@@ -170,7 +187,12 @@ public class MarketActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            showEmptyDialog(R.string.no_market_favorite);
+            showEmptyDialog(R.string.no_market_favorite, new CreateMarketStrategy() {
+                @Override
+                public void execute(Context context) {
+
+                }
+            });
         }
     };
 }
