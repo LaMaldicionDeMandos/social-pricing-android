@@ -18,6 +18,8 @@
     <string name="new_button">NUEVO</string>
     <string name="add">Nuevo</string>
     <string name="discard">DESCARTAR</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCELAR</string>
 
     <!-- Content description -->
     <string name="location_desc">Locación</string>
@@ -26,6 +28,7 @@
     <string name="new_desc">Nuevo</string>
 
     <!-- hints -->
+    <string name="market_name">Nombre</string>
     <string name="address">Dirección</string>
     <string name="locale">Localidad</string>
 
@@ -41,4 +44,5 @@
 
     <string name="new_title">Nuevo Negocio</string>
     <string name="panel_new_desc">Puedes agregar un Negocio tocando aquí.</string>
+
 </resources>

@@ -37,7 +37,7 @@ public class MarketActivity extends AppCompatActivity {
 
         @Override
         public void execute(Context context) {
-            Toast.makeText(context, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
+            showCreateManualMarketDiaglo();
         }
     }
     @Override
@@ -148,6 +148,32 @@ public class MarketActivity extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+    }
+
+    private void showCreateManualMarketDiaglo() {
+        final View dialogView = this.getLayoutInflater().inflate(R.layout.manual_market_creation_dialog, null);
+        new AlertDialog.Builder(MarketActivity.this)
+                .setTitle(R.string.new_title)
+                .setView(dialogView)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        TextView address = (TextView)dialogView.findViewById(R.id.address);
+                        TextView name = (TextView)dialogView.findViewById(R.id.name);
+                        TextView locale = (TextView)dialogView.findViewById(R.id.locale);
+                        Toast.makeText(MarketActivity.this, "No creado --> Name: " + name.getText().toString() +
+                        " Address: " + address.getText().toString() + " Locale: " + locale.getText().toString(),
+                                Toast.LENGTH_LONG).show();
+                        //marketService.searchByAddress(address.getText().toString(), locale.getText().toString());
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

@@ -18,6 +18,8 @@
     <string name="new_button">NEW</string>
     <string name="add">ADD</string>
     <string name="discard">DISCARD</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
 
     <!-- Content description -->
     <string name="location_desc">Location</string>
@@ -26,6 +28,7 @@
     <string name="new_desc">New</string>
 
     <!-- hints -->
+    <string name="market_name">Market name</string>
     <string name="address">Address</string>
     <string name="locale">City</string>
 
