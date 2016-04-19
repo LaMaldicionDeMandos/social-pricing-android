@@ -17,7 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.pasut.android.socialpricing.R;
+import org.pasut.android.socialpricing.model.Market;
 import org.pasut.android.socialpricing.services.MarketService;
+
+import java.util.List;
 
 import static org.pasut.android.socialpricing.services.MarketService.FAVORITE_SEARCH_EVENT;
 import static org.pasut.android.socialpricing.services.MarketService.LOCATION_SEARCH_EVENT;
@@ -152,8 +155,14 @@ public class InitActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            //TODO ver que me viene jeje
-            showEmptyDialog(R.string.no_market_location);
+            List<Market> markets = intent.getExtras().getParcelableArrayList("data");
+            if (markets.isEmpty()) {
+                showEmptyDialog(R.string.no_market_location);
+            } else if (markets.size() == 1) {
+                //TODO ir directamente a la siguiente activity con el market.
+            } else {
+                //TODO Mostrar la lista para seleccionar uno.
+            }
         }
     };
 
