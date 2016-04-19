@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Parcelable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
@@ -16,10 +18,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.collect.Iterables;
+
 import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
 import org.pasut.android.socialpricing.services.MarketService;
 
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.pasut.android.socialpricing.services.MarketService.FAVORITE_SEARCH_EVENT;
@@ -167,6 +173,22 @@ public class MarketActivity extends AppCompatActivity {
                         TextView address = (TextView)dialogView.findViewById(R.id.address);
                         TextView name = (TextView)dialogView.findViewById(R.id.name);
                         TextView locale = (TextView)dialogView.findViewById(R.id.locale);
+                        String completeAddress = address.getText().toString() + ", " + locale.getText().toString();
+                        Geocoder geo = new Geocoder(MarketActivity.this);
+                        try {
+                            List<Address> addresses = geo.getFromLocationName(completeAddress, 1);
+                            if (addresses.isEmpty()) {
+                                Toast.makeText(MarketActivity.this, "Address not found",
+                                        Toast.LENGTH_LONG).show();
+                            } else {
+                                Address addr = Iterables.getFirst(addresses, null);
+                                Toast.makeText(MarketActivity.this, addr.getAddressLine(0)
+                                        + " Lat: " + addr.getLatitude() + " lon: " + addr.getLongitude(),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         Toast.makeText(MarketActivity.this, "No creado --> Name: " + name.getText().toString() +
                         " Address: " + address.getText().toString() + " Locale: " + locale.getText().toString(),
                                 Toast.LENGTH_LONG).show();
