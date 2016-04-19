@@ -26,13 +26,13 @@ import static org.pasut.android.socialpricing.services.MarketService.FAVORITE_SE
 import static org.pasut.android.socialpricing.services.MarketService.LOCATION_SEARCH_EVENT;
 import static org.pasut.android.socialpricing.services.MarketService.SEARCH_SEARCH_EVENT;
 
-public class InitActivity extends AppCompatActivity {
+public class MarketActivity extends AppCompatActivity {
     private MarketService marketService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         marketService = new MarketService(this);
-        setContentView(R.layout.activity_init);
+        setContentView(R.layout.activity_market);
         View locationButton = findViewById(R.id.locationButton);
         View favoriteButton = findViewById(R.id.favoriteButton);
         View searchButton = findViewById(R.id.searchButton);
@@ -42,7 +42,7 @@ public class InitActivity extends AppCompatActivity {
                 //TODO Por ahora mockeo la llamada al servicio
                 Intent intent = new Intent(LOCATION_SEARCH_EVENT);
                 intent.putExtra("data", new Parcelable[]{});
-                LocalBroadcastManager.getInstance(InitActivity.this).sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(MarketActivity.this).sendBroadcast(intent);
             }
         });
         favoriteButton.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +51,7 @@ public class InitActivity extends AppCompatActivity {
                 //TODO Por ahora mockeo la llamada al servicio
                 Intent intent = new Intent(FAVORITE_SEARCH_EVENT);
                 intent.putExtra("data", new Parcelable[]{});
-                LocalBroadcastManager.getInstance(InitActivity.this).sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(MarketActivity.this).sendBroadcast(intent);
             }
         });
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -103,13 +103,13 @@ public class InitActivity extends AppCompatActivity {
     }
 
     private void showEmptyDialog(int messageId) {
-        new AlertDialog.Builder(InitActivity.this)
+        new AlertDialog.Builder(MarketActivity.this)
                 .setMessage(messageId)
                 .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Toast.makeText(InitActivity.this, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MarketActivity.this, "Sorry, not implemented yet :(", Toast.LENGTH_LONG).show();
                     }
                 })
                 .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
@@ -122,7 +122,7 @@ public class InitActivity extends AppCompatActivity {
 
     private void showSearchByAddressDiaglo() {
         final View dialogView = this.getLayoutInflater().inflate(R.layout.address_search_dialog, null);
-        new AlertDialog.Builder(InitActivity.this)
+        new AlertDialog.Builder(MarketActivity.this)
                 .setTitle(R.string.search_by_search_title)
                 .setMessage(R.string.search_by_address_explanation)
                 .setView(dialogView)
