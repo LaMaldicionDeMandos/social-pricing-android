@@ -15,11 +15,11 @@ public class Market implements Parcelable {
     private final GeoLocation geo;
 
     public Market(final String id, final String name, final String address, final String locale,
-                  final String normalizedAddress, final GeoLocation geo) {
+                  final GeoLocation geo) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.normalizedAddress = normalizedAddress;
+        this.normalizedAddress = address;
         this.locale = locale;
         this.geo = geo;
     }

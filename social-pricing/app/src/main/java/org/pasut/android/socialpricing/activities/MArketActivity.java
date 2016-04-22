@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.common.collect.Iterables;
 
 import org.pasut.android.socialpricing.R;
+import org.pasut.android.socialpricing.model.GeoLocation;
 import org.pasut.android.socialpricing.model.Market;
 import org.pasut.android.socialpricing.services.MarketService;
 
@@ -170,13 +171,16 @@ public class MarketActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        TextView address = (TextView)dialogView.findViewById(R.id.address);
-                        TextView name = (TextView)dialogView.findViewById(R.id.name);
-                        TextView locale = (TextView)dialogView.findViewById(R.id.locale);
-                        String completeAddress = address.getText().toString() + ", " + locale.getText().toString();
-                        Geocoder geo = new Geocoder(MarketActivity.this);
+                        String address = ((TextView)dialogView.findViewById(R.id.address)).getText()
+                                .toString();
+                        String name = ((TextView)dialogView.findViewById(R.id.name)).getText()
+                                .toString();
+                        String locale = ((TextView)dialogView.findViewById(R.id.locale)).getText()
+                                .toString();
+                        String completeAddress = address + ", " + locale;
+                        Geocoder geocoder = new Geocoder(MarketActivity.this);
                         try {
-                            List<Address> addresses = geo.getFromLocationName(completeAddress, 1);
+                            List<Address> addresses = geocoder.getFromLocationName(completeAddress, 1);
                             if (addresses.isEmpty()) {
                                 Toast.makeText(MarketActivity.this, "Address not found",
                                         Toast.LENGTH_LONG).show();
@@ -185,14 +189,12 @@ public class MarketActivity extends AppCompatActivity {
                                 Toast.makeText(MarketActivity.this, addr.getAddressLine(0)
                                         + " Lat: " + addr.getLatitude() + " lon: " + addr.getLongitude(),
                                         Toast.LENGTH_LONG).show();
+                                GeoLocation geo = new GeoLocation(addr.getLatitude(), addr.getLongitude());
+                                Market market = new Market(null, name, address, locale, geo);
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(MarketActivity.this, "No creado --> Name: " + name.getText().toString() +
-                        " Address: " + address.getText().toString() + " Locale: " + locale.getText().toString(),
-                                Toast.LENGTH_LONG).show();
-                        //marketService.searchByAddress(address.getText().toString(), locale.getText().toString());
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
