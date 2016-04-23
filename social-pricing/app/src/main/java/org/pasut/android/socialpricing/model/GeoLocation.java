@@ -35,11 +35,6 @@ public class GeoLocation implements Parcelable {
         dest.writeDouble(this.lon);
     }
 
-    public GeoLocation(ArrayMap map) {
-        this.lat = (double)map.get("lat");
-        this.lon = (double)map.get("lon");
-    }
-
     protected GeoLocation(Parcel in) {
         this.lat = in.readDouble();
         this.lon = in.readDouble();

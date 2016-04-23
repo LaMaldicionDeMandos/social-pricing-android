@@ -25,15 +25,6 @@ public class Market implements Parcelable {
 
     public Market(){}
 
-    public Market(ArrayMap map) {
-        this.id = (String)map.get("id");
-        this.name = (String)map.get("name");
-        this.address = (String)map.get("address");
-        this.normalizedAddress = (String)map.get("normalizedAddress");
-        this.locale = (String)map.get("locale");
-        this.geo = new GeoLocation((ArrayMap)map.get("geo"));
-    }
-
     public Market(final String id, final String name, final String address, final String locale,
                   final GeoLocation geo) {
         this.id = id;
