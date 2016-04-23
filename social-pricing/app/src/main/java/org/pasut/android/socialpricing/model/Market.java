@@ -119,4 +119,9 @@ public class Market implements Parcelable {
     public GeoLocation getGeo() {
         return geo;
     }
+
+    @Override
+    public String toString() {
+        return name + " - " + address + ", " + locale;
+    }
 }

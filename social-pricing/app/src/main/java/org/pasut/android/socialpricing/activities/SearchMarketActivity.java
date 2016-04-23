@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -169,6 +171,26 @@ public class SearchMarketActivity extends AppCompatActivity {
                 }).create().show();
     }
 
+    private void showMarketSelectionDiaglo(final List<Market> markets) {
+        ListAdapter adapter = new ArrayAdapter<Market>(SearchMarketActivity.this,
+                android.R.layout.simple_list_item_1, markets);
+        new AlertDialog.Builder(SearchMarketActivity.this)
+                .setTitle(R.string.search_by_search_title)
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Market market = markets.get(which);
+                        startMarketActivity(market);
+                    }
+                })
+                .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create().show();
+    }
+
     private void showCreateManualMarketDialog() {
         final View dialogView = this.getLayoutInflater().inflate(R.layout.manual_market_creation_dialog, null);
         new AlertDialog.Builder(SearchMarketActivity.this)
@@ -231,11 +253,11 @@ public class SearchMarketActivity extends AppCompatActivity {
             if (markets.isEmpty()) {
                 showEmptyDialog(R.string.no_market_location, new ManualCreateMarketStrategy());
             } else if (markets.size() == 1) {
-                //TODO ir directamente a la siguiente activity con el market.
                 Market market = Iterables.getFirst(markets, null);
                 startMarketActivity(market);
             } else {
                 //TODO Mostrar la lista para seleccionar uno.
+                showMarketSelectionDiaglo(markets);
                 Toast.makeText(context, "Varios Markets encontrados", Toast.LENGTH_SHORT).show();
             }
         }
