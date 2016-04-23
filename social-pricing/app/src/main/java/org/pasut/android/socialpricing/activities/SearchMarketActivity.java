@@ -32,7 +32,7 @@ import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARK
 import static org.pasut.android.socialpricing.services.MarketService.FAVORITE_SEARCH_EVENT;
 import static org.pasut.android.socialpricing.services.MarketService.LOCATION_SEARCH_EVENT;
 
-public class MarketActivity extends AppCompatActivity {
+public class SearchMarketActivity extends AppCompatActivity {
     private MarketService marketService;
 
     interface CreateMarketStrategy {
@@ -50,7 +50,7 @@ public class MarketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         marketService = new MarketService(this);
-        setContentView(R.layout.activity_market);
+        setContentView(R.layout.activity_search_market);
         View locationButton = findViewById(R.id.locationButton);
         View favoriteButton = findViewById(R.id.favoriteButton);
         View searchButton = findViewById(R.id.searchButton);
@@ -60,7 +60,7 @@ public class MarketActivity extends AppCompatActivity {
                 //TODO Por ahora mockeo la llamada al servicio
                 Intent intent = new Intent(LOCATION_SEARCH_EVENT);
                 intent.putExtra("data", new Parcelable[]{});
-                LocalBroadcastManager.getInstance(MarketActivity.this).sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
             }
         });
         favoriteButton.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +69,7 @@ public class MarketActivity extends AppCompatActivity {
                 //TODO Por ahora mockeo la llamada al servicio
                 Intent intent = new Intent(FAVORITE_SEARCH_EVENT);
                 intent.putExtra("data", new Parcelable[]{});
-                LocalBroadcastManager.getInstance(MarketActivity.this).sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
             }
         });
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -121,13 +121,13 @@ public class MarketActivity extends AppCompatActivity {
     }
 
     private void showEmptyDialog(final int messageId, final CreateMarketStrategy strategy) {
-        new AlertDialog.Builder(MarketActivity.this)
+        new AlertDialog.Builder(SearchMarketActivity.this)
                 .setMessage(messageId)
                 .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        strategy.execute(MarketActivity.this);
+                        strategy.execute(SearchMarketActivity.this);
                     }
                 })
                 .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
@@ -140,7 +140,7 @@ public class MarketActivity extends AppCompatActivity {
 
     private void showSearchByAddressDiaglo() {
         final View dialogView = this.getLayoutInflater().inflate(R.layout.address_search_dialog, null);
-        new AlertDialog.Builder(MarketActivity.this)
+        new AlertDialog.Builder(SearchMarketActivity.this)
                 .setTitle(R.string.search_by_search_title)
                 .setMessage(R.string.search_by_address_explanation)
                 .setView(dialogView)
@@ -163,7 +163,7 @@ public class MarketActivity extends AppCompatActivity {
 
     private void showCreateManualMarketDiaglo() {
         final View dialogView = this.getLayoutInflater().inflate(R.layout.manual_market_creation_dialog, null);
-        new AlertDialog.Builder(MarketActivity.this)
+        new AlertDialog.Builder(SearchMarketActivity.this)
                 .setTitle(R.string.new_title)
                 .setView(dialogView)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -177,15 +177,15 @@ public class MarketActivity extends AppCompatActivity {
                         String locale = ((TextView)dialogView.findViewById(R.id.locale)).getText()
                                 .toString();
                         String completeAddress = address + ", " + locale;
-                        Geocoder geocoder = new Geocoder(MarketActivity.this);
+                        Geocoder geocoder = new Geocoder(SearchMarketActivity.this);
                         try {
                             List<Address> addresses = geocoder.getFromLocationName(completeAddress, 1);
                             if (addresses.isEmpty()) {
-                                Toast.makeText(MarketActivity.this, "Address not found",
+                                Toast.makeText(SearchMarketActivity.this, "Address not found",
                                         Toast.LENGTH_LONG).show();
                             } else {
                                 Address addr = Iterables.getFirst(addresses, null);
-                                Toast.makeText(MarketActivity.this, addr.getAddressLine(0)
+                                Toast.makeText(SearchMarketActivity.this, addr.getAddressLine(0)
                                         + " Lat: " + addr.getLatitude() + " lon: " + addr.getLongitude(),
                                         Toast.LENGTH_LONG).show();
                                 GeoLocation geo = new GeoLocation(addr.getLatitude(), addr.getLongitude());
