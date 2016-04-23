@@ -9,6 +9,7 @@ import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
 import org.pasut.android.socialpricing.services.rest.AbstractRequest;
 import org.pasut.android.socialpricing.services.rest.MarketsByAddressRequest;
+import org.pasut.android.socialpricing.services.rest.SaveMarketRequest;
 
 import java.util.List;
 
@@ -38,6 +39,10 @@ public class RestService {
     public void marketsByAddress(final String address, final String locale,
                                  final RequestListener<List<Market>> listener) {
         executeRequest(new MarketsByAddressRequest(protocol, host, port, address, locale), listener);
+    }
+
+    public void saveMarket(final Market market, final RequestListener<Market> listener) {
+        executeRequest(new SaveMarketRequest(protocol, host, port, market), listener);
     }
 
     public void start(final Context context) {

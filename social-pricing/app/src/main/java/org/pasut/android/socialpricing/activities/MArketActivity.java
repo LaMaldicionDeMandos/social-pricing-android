@@ -26,12 +26,11 @@ import org.pasut.android.socialpricing.model.Market;
 import org.pasut.android.socialpricing.services.MarketService;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
+import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARKETS_EVENT;
 import static org.pasut.android.socialpricing.services.MarketService.FAVORITE_SEARCH_EVENT;
 import static org.pasut.android.socialpricing.services.MarketService.LOCATION_SEARCH_EVENT;
-import static org.pasut.android.socialpricing.services.MarketService.SEARCH_SEARCH_EVENT;
 
 public class MarketActivity extends AppCompatActivity {
     private MarketService marketService;
@@ -84,7 +83,7 @@ public class MarketActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(favoriteReceiver,
                 new IntentFilter(FAVORITE_SEARCH_EVENT));
         LocalBroadcastManager.getInstance(this).registerReceiver(searchReceiver,
-                new IntentFilter(SEARCH_SEARCH_EVENT));
+                new IntentFilter(ARRIVE_MARKETS_EVENT));
     }
 
     @Override
@@ -191,6 +190,7 @@ public class MarketActivity extends AppCompatActivity {
                                         Toast.LENGTH_LONG).show();
                                 GeoLocation geo = new GeoLocation(addr.getLatitude(), addr.getLongitude());
                                 Market market = new Market(null, name, address, locale, geo);
+                                marketService.save(market);
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -227,8 +227,10 @@ public class MarketActivity extends AppCompatActivity {
                 showEmptyDialog(R.string.no_market_location, new ManualCreateMarketStrategy());
             } else if (markets.size() == 1) {
                 //TODO ir directamente a la siguiente activity con el market.
+                Toast.makeText(context, "Un Market encontrado", Toast.LENGTH_SHORT).show();
             } else {
                 //TODO Mostrar la lista para seleccionar uno.
+                Toast.makeText(context, "Varios Markets encontrados", Toast.LENGTH_SHORT).show();
             }
         }
     };

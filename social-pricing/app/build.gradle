@@ -18,7 +18,7 @@ android {
     buildTypes {
         debug {
             resValue 'string', 'protocol', '"http"'
-            resValue 'string', 'host', '"192.168.1.35"'
+            resValue 'string', 'host', '"192.168.1.33"'
             resValue 'integer', 'port', '5000'
         }
         release {
@@ -40,5 +40,6 @@ dependencies {
 
     compile 'com.google.guava:guava:18.+'
     compile 'com.octo.android.robospice:robospice-google-http-client:1.4.+'
-    compile'com.google.http-client:google-http-client-gson:1.20.+'
+    compile'com.google.http-client:google-http-client-gson:1.21.+'
+    compile'com.google.http-client:google-http-client-jackson2:1.21.+'
 }

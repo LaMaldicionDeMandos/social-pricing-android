@@ -3,16 +3,26 @@ package org.pasut.android.socialpricing.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.api.client.util.Key;
+
 /**
  * Created by boot on 4/17/16.
  */
 public class Market implements Parcelable {
-    private final String id;
-    private final String name;
-    private final String address;
-    private final String normalizedAddress;
-    private final String locale;
-    private final GeoLocation geo;
+    @Key
+    private String id;
+    @Key
+    private String name;
+    @Key
+    private String address;
+    @Key
+    private String normalizedAddress;
+    @Key
+    private String locale;
+    @Key
+    private GeoLocation geo;
+
+    public Market(){}
 
     public Market(final String id, final String name, final String address, final String locale,
                   final GeoLocation geo) {
@@ -60,4 +70,52 @@ public class Market implements Parcelable {
             return new Market[size];
         }
     };
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setNormalizedAddress(String normalizedAddress) {
+        this.normalizedAddress = normalizedAddress;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    public void setGeo(GeoLocation geo) {
+        this.geo = geo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getNormalizedAddress() {
+        return normalizedAddress;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public GeoLocation getGeo() {
+        return geo;
+    }
 }

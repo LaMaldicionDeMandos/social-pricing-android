@@ -3,12 +3,20 @@ package org.pasut.android.socialpricing.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.api.client.util.Key;
+
 /**
  * Created by boot on 4/17/16.
  */
 public class GeoLocation implements Parcelable {
+    @Key
     private double lat;
+    @Key
     private double lon;
+
+    public GeoLocation() {
+
+    }
 
     public GeoLocation(final double lat, final double lon) {
         this.lat = lat;
@@ -42,4 +50,20 @@ public class GeoLocation implements Parcelable {
             return new GeoLocation[size];
         }
     };
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
 }
