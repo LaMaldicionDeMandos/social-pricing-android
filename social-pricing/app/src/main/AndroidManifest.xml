@@ -16,13 +16,19 @@
             android:label="@string/market_search" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service android:name=".services.RestSpiceService"
+        <activity
+            android:name=".activities.MarketActivity"
+            android:label="@string/title_activity_market" >
+        </activity>
+
+        <service
+            android:name=".services.RestSpiceService"
             android:exported="false" />
+
     </application>
 
 </manifest>

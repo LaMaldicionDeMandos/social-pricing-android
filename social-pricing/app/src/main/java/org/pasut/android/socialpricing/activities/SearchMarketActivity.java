@@ -43,7 +43,7 @@ public class SearchMarketActivity extends AppCompatActivity {
 
         @Override
         public void execute(Context context) {
-            showCreateManualMarketDiaglo();
+            showCreateManualMarketDialog();
         }
     }
     @Override
@@ -161,7 +161,7 @@ public class SearchMarketActivity extends AppCompatActivity {
                 }).create().show();
     }
 
-    private void showCreateManualMarketDiaglo() {
+    private void showCreateManualMarketDialog() {
         final View dialogView = this.getLayoutInflater().inflate(R.layout.manual_market_creation_dialog, null);
         new AlertDialog.Builder(SearchMarketActivity.this)
                 .setTitle(R.string.new_title)
@@ -185,9 +185,6 @@ public class SearchMarketActivity extends AppCompatActivity {
                                         Toast.LENGTH_LONG).show();
                             } else {
                                 Address addr = Iterables.getFirst(addresses, null);
-                                Toast.makeText(SearchMarketActivity.this, addr.getAddressLine(0)
-                                        + " Lat: " + addr.getLatitude() + " lon: " + addr.getLongitude(),
-                                        Toast.LENGTH_LONG).show();
                                 GeoLocation geo = new GeoLocation(addr.getLatitude(), addr.getLongitude());
                                 Market market = new Market(null, name, address, locale, geo);
                                 marketService.save(market);
@@ -227,7 +224,7 @@ public class SearchMarketActivity extends AppCompatActivity {
                 showEmptyDialog(R.string.no_market_location, new ManualCreateMarketStrategy());
             } else if (markets.size() == 1) {
                 //TODO ir directamente a la siguiente activity con el market.
-                Toast.makeText(context, "Un Market encontrado", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SearchMarketActivity.this, MarketActivity.class));
             } else {
                 //TODO Mostrar la lista para seleccionar uno.
                 Toast.makeText(context, "Varios Markets encontrados", Toast.LENGTH_SHORT).show();

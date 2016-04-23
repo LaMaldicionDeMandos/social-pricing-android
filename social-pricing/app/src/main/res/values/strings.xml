@@ -44,5 +44,8 @@
 
     <string name="new_title">Add new Market</string>
     <string name="panel_new_desc">You can add a market touching here.</string>
+    <string name="title_activity_market">MarketActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
