@@ -3,6 +3,7 @@ package org.pasut.android.socialpricing.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.api.client.util.ArrayMap;
 import com.google.api.client.util.Key;
 
 /**
@@ -32,6 +33,11 @@ public class GeoLocation implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeDouble(this.lat);
         dest.writeDouble(this.lon);
+    }
+
+    public GeoLocation(ArrayMap map) {
+        this.lat = (double)map.get("lat");
+        this.lon = (double)map.get("lon");
     }
 
     protected GeoLocation(Parcel in) {

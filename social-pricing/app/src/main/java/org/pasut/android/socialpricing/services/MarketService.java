@@ -51,7 +51,7 @@ public class MarketService {
 
             @Override
             public void onRequestSuccess(Market market) {
-                ArrayList<Market> list = new ArrayList<Market>(1);
+                ArrayList<Market> list = new ArrayList<>(1);
                 list.add(market);
                 listener.onRequestSuccess(list);
             }

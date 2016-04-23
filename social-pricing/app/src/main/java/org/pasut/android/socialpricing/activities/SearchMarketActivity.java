@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.api.client.util.ArrayMap;
 import com.google.common.collect.Iterables;
 
 import org.pasut.android.socialpricing.R;
@@ -118,6 +119,13 @@ public class SearchMarketActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startMarketActivity(Market market) {
+        Intent intent = new Intent(this, MarketActivity.class);
+        intent.putExtra(MarketActivity.MARKET, market);
+        startActivity(intent);
+        finish();
     }
 
     private void showEmptyDialog(final int messageId, final CreateMarketStrategy strategy) {
@@ -224,7 +232,8 @@ public class SearchMarketActivity extends AppCompatActivity {
                 showEmptyDialog(R.string.no_market_location, new ManualCreateMarketStrategy());
             } else if (markets.size() == 1) {
                 //TODO ir directamente a la siguiente activity con el market.
-                startActivity(new Intent(SearchMarketActivity.this, MarketActivity.class));
+                Market market = Iterables.getFirst(markets, null);
+                startMarketActivity(market);
             } else {
                 //TODO Mostrar la lista para seleccionar uno.
                 Toast.makeText(context, "Varios Markets encontrados", Toast.LENGTH_SHORT).show();

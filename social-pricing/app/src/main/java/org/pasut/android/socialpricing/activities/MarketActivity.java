@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import org.pasut.android.socialpricing.R;
 
 public class MarketActivity extends AppCompatActivity {
+    private static final String TAG = MarketActivity.class.getSimpleName();
+    public static final String MARKET = "market";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
