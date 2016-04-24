@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.SearchMarketActivity"
+            android:launchMode="singleTop"
             android:label="@string/market_search" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,7 @@
         </activity>
 
         <activity
+            android:parentActivityName=".activities.SearchMarketActivity"
             android:name=".activities.MarketActivity"
             android:label="@string/title_activity_market" >
         </activity>

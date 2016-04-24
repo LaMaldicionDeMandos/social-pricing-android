@@ -129,7 +129,6 @@ public class SearchMarketActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MarketActivity.class);
         intent.putExtra(MarketActivity.MARKET, market);
         startActivity(intent);
-        finish();
     }
 
     private void showEmptyDialog(final int messageId, final CreateMarketStrategy strategy) {
