@@ -12,9 +12,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -172,21 +174,15 @@ public class SearchMarketActivity extends AppCompatActivity {
     }
 
     private void showMarketSelectionDiaglo(final List<Market> markets) {
-        ListAdapter adapter = new ArrayAdapter<Market>(SearchMarketActivity.this,
-                android.R.layout.simple_list_item_1, markets);
+        ListAdapter adapter = new MarketArrayAdapter(SearchMarketActivity.this, R.layout.market_item
+        , markets);
         new AlertDialog.Builder(SearchMarketActivity.this)
-                .setTitle(R.string.search_by_search_title)
+                .setTitle(R.string.market_select)
                 .setAdapter(adapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Market market = markets.get(which);
                         startMarketActivity(market);
-                    }
-                })
-                .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
                     }
                 }).create().show();
     }
@@ -256,9 +252,7 @@ public class SearchMarketActivity extends AppCompatActivity {
                 Market market = Iterables.getFirst(markets, null);
                 startMarketActivity(market);
             } else {
-                //TODO Mostrar la lista para seleccionar uno.
                 showMarketSelectionDiaglo(markets);
-                Toast.makeText(context, "Varios Markets encontrados", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -275,4 +269,30 @@ public class SearchMarketActivity extends AppCompatActivity {
             });
         }
     };
+
+    private class MarketArrayAdapter extends ArrayAdapter<Market> {
+        int layoutResourceId;
+        List<Market> data;
+
+        public MarketArrayAdapter(Context context, int resource, List<Market> markets) {
+            super(context, resource, markets);
+            this.layoutResourceId = resource;
+            this.data = markets;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView==null){
+                LayoutInflater inflater = (LayoutInflater)getContext()
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(layoutResourceId, parent, false);
+            }
+            Market market = data.get(position);
+            TextView name = (TextView)convertView.findViewById(R.id.name);
+            TextView address = (TextView)convertView.findViewById(R.id.address);
+            name.setText(market.getName());
+            address.setText(market.getAddress() + " - " + market.getLocale());
+            return convertView;
+        }
+    }
 }

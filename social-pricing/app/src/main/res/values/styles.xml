@@ -35,10 +35,14 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="TitleTextWhite" parent="Theme.AppCompat.Light">
-        <item name="android:textSize">@dimen/text_title</item>
-        <item name="android:textStyle">bold</item>
+    <style name="TitleTextWhite" parent="TitleText">
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleText" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/text_title</item>
+
     </style>
 
     <style name="DescText" parent="Theme.AppCompat.Light">
