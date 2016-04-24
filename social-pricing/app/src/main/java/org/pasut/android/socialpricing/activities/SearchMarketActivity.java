@@ -22,22 +22,24 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.api.client.util.ArrayMap;
 import com.google.common.collect.Iterables;
+import com.google.common.reflect.TypeToken;
 
 import org.pasut.android.socialpricing.R;
+import org.pasut.android.socialpricing.SocialPriceApplication;
 import org.pasut.android.socialpricing.model.GeoLocation;
 import org.pasut.android.socialpricing.model.Market;
 import org.pasut.android.socialpricing.services.MarketService;
+import org.pasut.android.socialpricing.services.PreferencesService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARKETS_EVENT;
-import static org.pasut.android.socialpricing.services.MarketService.FAVORITE_SEARCH_EVENT;
-import static org.pasut.android.socialpricing.services.MarketService.LOCATION_SEARCH_EVENT;
 
 public class SearchMarketActivity extends AppCompatActivity {
+    private final static String FAVORITES = "favorites";
     private MarketService marketService;
 
     interface CreateMarketStrategy {
@@ -63,8 +65,8 @@ public class SearchMarketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO Por ahora mockeo la llamada al servicio
-                Intent intent = new Intent(LOCATION_SEARCH_EVENT);
-                intent.putExtra("data", new Parcelable[]{});
+                Intent intent = new Intent(ARRIVE_MARKETS_EVENT);
+                intent.putParcelableArrayListExtra("data", new ArrayList<Market>());
                 LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
             }
         });
@@ -72,8 +74,13 @@ public class SearchMarketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO Por ahora mockeo la llamada al servicio
-                Intent intent = new Intent(FAVORITE_SEARCH_EVENT);
-                intent.putExtra("data", new Parcelable[]{});
+                PreferencesService preferences = ((SocialPriceApplication)getApplication()).getPreferenceService();
+                ArrayList<Market> markets = preferences.contain(FAVORITES)
+                        ? (ArrayList<Market>) preferences.get(FAVORITES, new TypeToken<ArrayList<Market>>() {
+                }.getType())
+                        : new ArrayList<Market>();
+                Intent intent = new Intent(ARRIVE_MARKETS_EVENT);
+                intent.putParcelableArrayListExtra("data", markets);
                 LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
             }
         });
@@ -83,18 +90,12 @@ public class SearchMarketActivity extends AppCompatActivity {
                 showSearchByAddressDiaglo();
             }
         });
-        LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver,
-                new IntentFilter(LOCATION_SEARCH_EVENT));
-        LocalBroadcastManager.getInstance(this).registerReceiver(favoriteReceiver,
-                new IntentFilter(FAVORITE_SEARCH_EVENT));
         LocalBroadcastManager.getInstance(this).registerReceiver(searchReceiver,
                 new IntentFilter(ARRIVE_MARKETS_EVENT));
     }
 
     @Override
     protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(locationReceiver);
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(favoriteReceiver);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(searchReceiver);
 
         marketService.destroy();
@@ -227,19 +228,6 @@ public class SearchMarketActivity extends AppCompatActivity {
                 }).create().show();
     }
 
-    private final BroadcastReceiver locationReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            showEmptyDialog(R.string.no_market_location, new CreateMarketStrategy() {
-                @Override
-                public void execute(Context context) {
-
-                }
-            });
-        }
-    };
-
     private final BroadcastReceiver searchReceiver = new BroadcastReceiver() {
 
         @Override
@@ -253,19 +241,6 @@ public class SearchMarketActivity extends AppCompatActivity {
             } else {
                 showMarketSelectionDiaglo(markets);
             }
-        }
-    };
-
-    private final BroadcastReceiver favoriteReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            showEmptyDialog(R.string.no_market_favorite, new CreateMarketStrategy() {
-                @Override
-                public void execute(Context context) {
-
-                }
-            });
         }
     };
 
