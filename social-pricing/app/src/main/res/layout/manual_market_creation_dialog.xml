@@ -12,20 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/edit_text"
-        android:hint="@string/market_name" />
+        android:hint="@string/market_name"
+        android:capitalize="words" />
 
     <EditText android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/edit_text"
-        android:hint="@string/address" />
+        android:hint="@string/address"
+        android:capitalize="words" />
 
     <EditText android:id="@+id/locale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/edit_text"
-        android:hint="@string/locale" />
+        android:hint="@string/locale"
+        android:capitalize="words" />
 
 </LinearLayout>
