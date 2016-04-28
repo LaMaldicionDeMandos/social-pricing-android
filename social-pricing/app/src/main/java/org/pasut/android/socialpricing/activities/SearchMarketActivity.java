@@ -40,6 +40,7 @@ import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARK
 
 public class SearchMarketActivity extends AppCompatActivity {
     private final static String FAVORITES = "favorites";
+    private final static String FAVORITES_IDS = "favorites.";
     private MarketService marketService;
 
     interface CreateMarketStrategy {
@@ -74,7 +75,7 @@ public class SearchMarketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO Por ahora mockeo la llamada al servicio
-                PreferencesService preferences = ((SocialPriceApplication)getApplication()).getPreferenceService();
+                PreferencesService preferences = getPreferences();
                 ArrayList<Market> markets = preferences.contain(FAVORITES)
                         ? (ArrayList<Market>) preferences.get(FAVORITES, new TypeToken<ArrayList<Market>>() {
                 }.getType())
@@ -182,6 +183,7 @@ public class SearchMarketActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Market market = markets.get(which);
+                        saveAsFavorite(market);
                         startMarketActivity(market);
                     }
                 }).create().show();
@@ -196,11 +198,11 @@ public class SearchMarketActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        String address = ((TextView)dialogView.findViewById(R.id.address)).getText()
+                        String address = ((TextView) dialogView.findViewById(R.id.address)).getText()
                                 .toString();
-                        String name = ((TextView)dialogView.findViewById(R.id.name)).getText()
+                        String name = ((TextView) dialogView.findViewById(R.id.name)).getText()
                                 .toString();
-                        String locale = ((TextView)dialogView.findViewById(R.id.locale)).getText()
+                        String locale = ((TextView) dialogView.findViewById(R.id.locale)).getText()
                                 .toString();
                         String completeAddress = address + ", " + locale;
                         Geocoder geocoder = new Geocoder(SearchMarketActivity.this);
@@ -228,6 +230,22 @@ public class SearchMarketActivity extends AppCompatActivity {
                 }).create().show();
     }
 
+    private PreferencesService getPreferences() {
+        return ((SocialPriceApplication)getApplication()).getPreferenceService();
+    }
+
+    private void saveAsFavorite(Market market) {
+        PreferencesService preferences = getPreferences();
+        if (!preferences.contain(FAVORITES_IDS+market.getId())) {
+            List<Market> favorites = preferences.get(FAVORITES, new TypeToken<ArrayList<Market>>() {
+            }.getType());
+            favorites = favorites != null ? favorites : new ArrayList<Market>();
+            favorites.add(market);
+            preferences.put(FAVORITES, favorites);
+            preferences.put(FAVORITES_IDS+market.getId(), market);
+        }
+    }
+
     private final BroadcastReceiver searchReceiver = new BroadcastReceiver() {
 
         @Override
@@ -237,6 +255,7 @@ public class SearchMarketActivity extends AppCompatActivity {
                 showEmptyDialog(R.string.no_market_location, new ManualCreateMarketStrategy());
             } else if (markets.size() == 1) {
                 Market market = Iterables.getFirst(markets, null);
+                saveAsFavorite(market);
                 startMarketActivity(market);
             } else {
                 showMarketSelectionDiaglo(markets);
