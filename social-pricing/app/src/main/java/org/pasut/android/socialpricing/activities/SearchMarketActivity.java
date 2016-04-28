@@ -1,17 +1,25 @@
 package org.pasut.android.socialpricing.activities;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Parcelable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,11 +44,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.location.LocationManager.GPS_PROVIDER;
+import static android.location.LocationManager.NETWORK_PROVIDER;
 import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARKETS_EVENT;
 
 public class SearchMarketActivity extends AppCompatActivity {
+    private final static String TAG = SearchMarketActivity.class.getSimpleName();
     private final static String FAVORITES = "favorites";
     private final static String FAVORITES_IDS = "favorites.";
+    private final static int PERMISSION_LOCATION_REQUEST = 1556;
     private MarketService marketService;
 
     interface CreateMarketStrategy {
@@ -54,6 +66,7 @@ public class SearchMarketActivity extends AppCompatActivity {
             showCreateManualMarketDialog();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,16 +78,12 @@ public class SearchMarketActivity extends AppCompatActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Por ahora mockeo la llamada al servicio
-                Intent intent = new Intent(ARRIVE_MARKETS_EVENT);
-                intent.putParcelableArrayListExtra("data", new ArrayList<Market>());
-                LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
+                searchMarketByLocation();
             }
         });
         favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Por ahora mockeo la llamada al servicio
                 PreferencesService preferences = getPreferences();
                 ArrayList<Market> markets = preferences.contain(FAVORITES)
                         ? (ArrayList<Market>) preferences.get(FAVORITES, new TypeToken<ArrayList<Market>>() {
@@ -127,6 +136,51 @@ public class SearchMarketActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == PERMISSION_LOCATION_REQUEST) {
+            LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    public void requestPermissions(@NonNull String[] permissions, int requestCode)
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for Activity#requestPermissions for more details.
+                return;
+            }
+            Location location = locationManager.getLastKnownLocation(NETWORK_PROVIDER);
+            locationFound(location);
+        }
+    }
+
+    private void locationFound(Location location) {
+        double lat = location.getLatitude();
+        double lon = location.getLongitude();
+        Toast.makeText(SearchMarketActivity.this, "Sorry not implemented yet lat: " + lat + " lon: " + lon, Toast.LENGTH_SHORT).show();
+    }
+
+    private void searchMarketByLocation() {
+
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        try {
+            Location location = locationManager.getLastKnownLocation(NETWORK_PROVIDER);
+            locationFound(location);
+        } catch (SecurityException e) {
+            Log.e(TAG, "Not permissions for geolocation");
+            Toast.makeText(this, R.string.not_geo_permission, Toast.LENGTH_SHORT).show();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_LOCATION_REQUEST);
+            } else {
+                Intent intent = new Intent(ARRIVE_MARKETS_EVENT);
+                intent.putParcelableArrayListExtra("data", new ArrayList<Market>());
+                LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
+            }
+        }
+    }
+
     private void startMarketActivity(Market market) {
         Intent intent = new Intent(this, MarketActivity.class);
         intent.putExtra(MarketActivity.MARKET, market);
@@ -161,8 +215,8 @@ public class SearchMarketActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        TextView address = (TextView)dialogView.findViewById(R.id.address);
-                        TextView locale = (TextView)dialogView.findViewById(R.id.locale);
+                        TextView address = (TextView) dialogView.findViewById(R.id.address);
+                        TextView locale = (TextView) dialogView.findViewById(R.id.locale);
                         marketService.searchByAddress(address.getText().toString(), locale.getText().toString());
                     }
                 })
@@ -176,7 +230,7 @@ public class SearchMarketActivity extends AppCompatActivity {
 
     private void showMarketSelectionDiaglo(final List<Market> markets) {
         ListAdapter adapter = new MarketArrayAdapter(SearchMarketActivity.this, R.layout.market_item
-        , markets);
+                , markets);
         new AlertDialog.Builder(SearchMarketActivity.this)
                 .setTitle(R.string.market_select)
                 .setAdapter(adapter, new DialogInterface.OnClickListener() {
@@ -231,18 +285,18 @@ public class SearchMarketActivity extends AppCompatActivity {
     }
 
     private PreferencesService getPreferences() {
-        return ((SocialPriceApplication)getApplication()).getPreferenceService();
+        return ((SocialPriceApplication) getApplication()).getPreferenceService();
     }
 
     private void saveAsFavorite(Market market) {
         PreferencesService preferences = getPreferences();
-        if (!preferences.contain(FAVORITES_IDS+market.getId())) {
+        if (!preferences.contain(FAVORITES_IDS + market.getId())) {
             List<Market> favorites = preferences.get(FAVORITES, new TypeToken<ArrayList<Market>>() {
             }.getType());
             favorites = favorites != null ? favorites : new ArrayList<Market>();
             favorites.add(market);
             preferences.put(FAVORITES, favorites);
-            preferences.put(FAVORITES_IDS+market.getId(), market);
+            preferences.put(FAVORITES_IDS + market.getId(), market);
         }
     }
 
