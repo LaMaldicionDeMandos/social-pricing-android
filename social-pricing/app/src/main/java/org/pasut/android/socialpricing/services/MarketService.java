@@ -41,6 +41,10 @@ public class MarketService {
         restService.marketsByAddress(address, locale, new MarketsListener());
     }
 
+    public void searchByLocation(final double lat, final double lon) {
+        restService.marketsByLocation(lat, lon, new MarketsListener());
+    }
+
     public void save(final Market market) {
         final MarketsListener listener = new MarketsListener();
         restService.saveMarket(market, new RequestListener<Market>() {

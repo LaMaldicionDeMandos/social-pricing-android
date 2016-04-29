@@ -159,7 +159,7 @@ public class SearchMarketActivity extends AppCompatActivity {
     private void locationFound(Location location) {
         double lat = location.getLatitude();
         double lon = location.getLongitude();
-        Toast.makeText(SearchMarketActivity.this, "Sorry not implemented yet lat: " + lat + " lon: " + lon, Toast.LENGTH_SHORT).show();
+        marketService.searchByLocation(lat, lon);
     }
 
     private void searchMarketByLocation() {
