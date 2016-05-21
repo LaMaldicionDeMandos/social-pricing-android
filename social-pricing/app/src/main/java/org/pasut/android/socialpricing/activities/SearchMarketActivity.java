@@ -14,7 +14,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
-import android.os.Parcelable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -45,15 +44,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.location.LocationManager.GPS_PROVIDER;
-import static android.location.LocationManager.NETWORK_PROVIDER;
 import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARKETS_EVENT;
 
-public class SearchMarketActivity extends AppCompatActivity {
+public class SearchMarketActivity extends AppCompatActivity implements LocationListener {
     private final static String TAG = SearchMarketActivity.class.getSimpleName();
     private final static String FAVORITES = "favorites";
     private final static String FAVORITES_IDS = "favorites.";
     private final static int PERMISSION_LOCATION_REQUEST = 1556;
+
+    private double lat;
+    private double lon;
+    private boolean hasLocation = false;
+
     private MarketService marketService;
+
+    @Override
+    public void onLocationChanged(Location location) {
+        locationFound(location);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 
     interface CreateMarketStrategy {
         void execute(Context context);
@@ -72,6 +95,7 @@ public class SearchMarketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         marketService = new MarketService(this);
         setContentView(R.layout.activity_search_market);
+        prepareLocationService();
         View locationButton = findViewById(R.id.locationButton);
         View favoriteButton = findViewById(R.id.favoriteButton);
         View searchButton = findViewById(R.id.searchButton);
@@ -102,6 +126,23 @@ public class SearchMarketActivity extends AppCompatActivity {
         });
         LocalBroadcastManager.getInstance(this).registerReceiver(searchReceiver,
                 new IntentFilter(ARRIVE_MARKETS_EVENT));
+    }
+
+    private void prepareLocationService() {
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        try {
+            locationManager.requestLocationUpdates(GPS_PROVIDER, 0, 0, this);
+        } catch (SecurityException e) {
+            Log.e(TAG, "Not permissions for geolocation");
+            Toast.makeText(this, R.string.not_geo_permission, Toast.LENGTH_SHORT).show();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_LOCATION_REQUEST);
+            } else {
+                Intent intent = new Intent(ARRIVE_MARKETS_EVENT);
+                intent.putParcelableArrayListExtra("data", new ArrayList<Market>());
+                LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
+            }
+        }
     }
 
     @Override
@@ -151,23 +192,35 @@ public class SearchMarketActivity extends AppCompatActivity {
                 // for Activity#requestPermissions for more details.
                 return;
             }
-            Location location = locationManager.getLastKnownLocation(NETWORK_PROVIDER);
-            locationFound(location);
+            prepareLocationService();
         }
     }
 
     private void locationFound(Location location) {
-        double lat = location.getLatitude();
-        double lon = location.getLongitude();
-        marketService.searchByLocation(lat, lon);
+        lat = location.getLatitude();
+        lon = location.getLongitude();
+        hasLocation = true;
     }
 
     private void searchMarketByLocation() {
+        if (hasLocation) {
+            marketService.searchByLocation(lat, lon);
+        } else {
+            LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            try {
+                Location location = locationManager.getLastKnownLocation(GPS_PROVIDER);
+                marketService.searchByLocation(location.getLatitude(), location.getLongitude());
+            } catch (SecurityException e) {
+                Log.e(TAG, "Not permissions for geolocation");
+                Toast.makeText(this, R.string.not_geo_permission, Toast.LENGTH_SHORT).show();
 
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+                Intent intent = new Intent(ARRIVE_MARKETS_EVENT);
+                intent.putParcelableArrayListExtra("data", new ArrayList<Market>());
+                LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
+            }
+        }
+
         try {
-            Location location = locationManager.getLastKnownLocation(NETWORK_PROVIDER);
-            locationFound(location);
         } catch (SecurityException e) {
             Log.e(TAG, "Not permissions for geolocation");
             Toast.makeText(this, R.string.not_geo_permission, Toast.LENGTH_SHORT).show();
