@@ -6,6 +6,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/green_panel</item>
         <item name="colorAccent">@color/green_panel</item>
+        <item name="colorPrimaryDark">@color/green_panel_dark</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColor">#212121</item>
