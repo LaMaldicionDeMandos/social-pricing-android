@@ -18,7 +18,7 @@ android {
     buildTypes {
         debug {
             resValue 'string', 'protocol', '"http"'
-            resValue 'string', 'host', '"192.168.1.28"'
+            resValue 'string', 'host', '"192.168.0.13"'
             resValue 'integer', 'port', '5000'
         }
         release {
