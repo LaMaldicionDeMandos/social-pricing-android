@@ -6,6 +6,7 @@
     <color name="blue_panel">#2196f3</color>
     <color name="green_panel">#4caf50</color>
     <color name="green_panel_dark">#388e3c</color>
+    <color name="amber">#ffc107</color>
 
     <!-- Buttons -->
     <color name="pink_button">#ff4081</color>

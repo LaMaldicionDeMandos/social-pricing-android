@@ -1,5 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.pasut.android.socialpricing.activities.MarketActivity"
     android:focusable="false">
@@ -56,4 +58,13 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view"
+        app:layout_anchor="@+id/toolbar"
+        android:src="@drawable/barcode_scan_black"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>
