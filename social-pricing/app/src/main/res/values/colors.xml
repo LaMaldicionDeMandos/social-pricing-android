@@ -22,6 +22,7 @@
     <color name="green_button_highlight">#388e3c</color>
 
     <!-- Text -->
+    <color name="subtitle_white_text">#91ffffff</color>
     <color name="pink_text_desc">#f8bbd0</color>
     <color name="yellow_text_desc">#ffecb3</color>
     <color name="blue_text_desc">#bbdefb</color>
@@ -29,4 +30,7 @@
     <color name="flat_button">#1e94f2</color>
     <color name="blue_grey">#607d8b</color>
     <color name="edit_text">#212121</color>
+    <color name="subtitle_text">#91212121</color>
+    <color name="green_text">#679f38</color>
+    <color name="red_text">#da563e</color>
 </resources>
