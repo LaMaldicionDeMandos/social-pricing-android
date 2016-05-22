@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingLeft="@dimen/dialog_horizontal_margin"
-    android:paddingRight="@dimen/dialog_horizontal_margin"
-    android:paddingBottom="@dimen/dialog_horizontal_margin"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:elevation="0dp"
     android:layout_margin="4dp"
     android:layout_width="match_parent"
@@ -47,4 +44,4 @@
             android:textSize="34sp"
             android:gravity="center_vertical" />
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</FrameLayout>
