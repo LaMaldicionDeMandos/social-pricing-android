@@ -45,7 +45,7 @@ public class MarketActivity extends AppCompatActivity {
     private ImageView tickCross;
     private AnimatedVectorDrawable tickToCross;
     private AnimatedVectorDrawable crossToTick;
-    private boolean tick = true;
+    private boolean tick = false;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
