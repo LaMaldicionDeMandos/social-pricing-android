@@ -1,6 +1,9 @@
 package org.pasut.android.socialpricing.activities;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.api.client.util.Lists;
@@ -38,6 +42,12 @@ public class MarketActivity extends AppCompatActivity {
 
     private PricesAdapter adapter;
 
+    private ImageView tickCross;
+    private AnimatedVectorDrawable tickToCross;
+    private AnimatedVectorDrawable crossToTick;
+    private boolean tick = true;
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +57,18 @@ public class MarketActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setSubtitle(market.getAddress());
         populatePrices();
+
+        tickCross = (ImageView) findViewById(R.id.tick_cross);
+        tickToCross = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_tick_cross);
+        crossToTick = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_cross_tick);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void animate(View view) {
+        AnimatedVectorDrawable drawable = tick ? tickToCross : crossToTick;
+        tickCross.setImageDrawable(drawable);
+        drawable.start();
+        tick = !tick;
     }
 
     private void populatePrices() {
