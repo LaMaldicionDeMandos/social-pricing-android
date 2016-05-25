@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:id="@+id/done_edit"
+        android:src="@drawable/ic_edit"
+        android:onClick="editDonePrice"
+        android:layout_below="@+id/last_update"
+        android:layout_toRightOf="@+id/product_price"
+        android:layout_toEndOf="@+id/product_price" />

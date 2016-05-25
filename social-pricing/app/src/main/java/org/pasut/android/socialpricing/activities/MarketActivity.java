@@ -3,6 +3,7 @@ package org.pasut.android.socialpricing.activities;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,18 +58,38 @@ public class MarketActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setSubtitle(market.getAddress());
         populatePrices();
-
-        doneEdit = (ImageView) findViewById(R.id.done_edit);
-        doneToEdit = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_done_edit);
-        editToDone = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_edit_done);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void editDonePrice(View view) {
+        ImageView doneEdit = (ImageView) findViewById(R.id.done_edit);
+        AnimatedVectorDrawable doneToEdit = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_done_edit);
+        AnimatedVectorDrawable editToDone = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_edit_done);
+
         AnimatedVectorDrawable drawable = done ? doneToEdit : editToDone;
         doneEdit.setImageDrawable(drawable);
         drawable.start();
         done = !done;
+        changeToEditPrice(done);
+    }
+
+    public void editPrice(View view) {
+        ImageView doneEdit = (ImageView) findViewById(R.id.done_edit);
+        Drawable editDrawable = getResources().getDrawable(R.drawable.ic_edit_white_24dp);
+        Drawable doneDrawable = getResources().getDrawable(R.drawable.ic_done_white_24dp);
+        Drawable drawable = !done ? doneDrawable : editDrawable;
+        doneEdit.setImageDrawable(drawable);
+        done = !done;
+        changeToEditPrice(done);
+    }
+
+    private void changeToEditPrice(boolean toEdit) {
+        View label = findViewById(R.id.product_price);
+        View edit = findViewById(R.id.product_price_edit);
+        View toMakeVisible = toEdit ? edit : label;
+        View toMakeInvisible = toEdit ? label : edit;
+        toMakeVisible.setVisibility(View.VISIBLE);
+        toMakeInvisible.setVisibility(View.INVISIBLE);
     }
 
     private void populatePrices() {
