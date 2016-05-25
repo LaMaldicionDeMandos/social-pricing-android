@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_edit">
+
+    <target
+        android:name="edit"
+        android:animation="@animator/edit_to_done" />
+
+    <target
+        android:name="groupDoneEdit"
+        android:animation="@animator/rotate_edit_done" />
+
+</animated-vector>

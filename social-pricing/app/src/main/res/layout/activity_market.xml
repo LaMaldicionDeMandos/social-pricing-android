@@ -74,9 +74,9 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:id="@+id/tick_cross"
-                        android:src="@drawable/ic_cross"
-                        android:onClick="animate"
+                        android:id="@+id/done_edit"
+                        android:src="@drawable/ic_edit"
+                        android:onClick="editDonePrice"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true" />
                 </RelativeLayout>

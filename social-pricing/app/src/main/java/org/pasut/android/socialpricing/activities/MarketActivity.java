@@ -42,10 +42,10 @@ public class MarketActivity extends AppCompatActivity {
 
     private PricesAdapter adapter;
 
-    private ImageView tickCross;
-    private AnimatedVectorDrawable tickToCross;
-    private AnimatedVectorDrawable crossToTick;
-    private boolean tick = false;
+    private ImageView doneEdit;
+    private AnimatedVectorDrawable doneToEdit;
+    private AnimatedVectorDrawable editToDone;
+    private boolean done = false;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -58,17 +58,17 @@ public class MarketActivity extends AppCompatActivity {
         getSupportActionBar().setSubtitle(market.getAddress());
         populatePrices();
 
-        tickCross = (ImageView) findViewById(R.id.tick_cross);
-        tickToCross = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_tick_cross);
-        crossToTick = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_cross_tick);
+        doneEdit = (ImageView) findViewById(R.id.done_edit);
+        doneToEdit = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_done_edit);
+        editToDone = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_edit_done);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void animate(View view) {
-        AnimatedVectorDrawable drawable = tick ? tickToCross : crossToTick;
-        tickCross.setImageDrawable(drawable);
+    public void editDonePrice(View view) {
+        AnimatedVectorDrawable drawable = done ? doneToEdit : editToDone;
+        doneEdit.setImageDrawable(drawable);
         drawable.start();
-        tick = !tick;
+        done = !done;
     }
 
     private void populatePrices() {

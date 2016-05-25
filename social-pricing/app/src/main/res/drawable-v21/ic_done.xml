@@ -6,12 +6,12 @@
     android:viewportHeight="24">
 
     <group
-        android:name="groupTickCross"
+        android:name="groupDoneEdit"
         android:pivotX="12"
         android:pivotY="12">
 
         <path
-            android:name="tick"
+            android:name="done"
             android:pathData="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
             android:strokeWidth="2"
             android:strokeLineCap="square"
