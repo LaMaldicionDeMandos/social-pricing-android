@@ -15,8 +15,8 @@
                 android:id="@+id/toolbar"
                 android:gravity="top"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:elevation="4dp"
+                android:layout_height="@dimen/expanded_action_bar"
+                android:elevation="@dimen/action_bar_elevation"
                 android:focusableInTouchMode="false">
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Coca Cola 2.25 Lt"
-                        android:id="@+id/textView"
+                        android:id="@+id/product_title"
                         android:textSize="@dimen/action_bar_text"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
@@ -42,10 +42,10 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Gaseosa Coca Cola 2 Litros y cuarto"
-                        android:id="@+id/textView2"
-                        android:layout_below="@+id/textView"
-                        android:layout_alignLeft="@+id/textView"
-                        android:layout_alignStart="@+id/textView"
+                        android:id="@+id/product_description"
+                        android:layout_below="@+id/product_title"
+                        android:layout_alignLeft="@+id/product_title"
+                        android:layout_alignStart="@+id/product_title"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/product_desc_text" />
 
@@ -54,40 +54,40 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="$33,00"
-                        android:id="@+id/textView3"
+                        android:id="@+id/product_price"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:textColor="@android:color/white"
-                        android:textSize="40sp"
-                        android:paddingEnd="10dp" />
+                        android:textSize="@dimen/extra_large_text"
+                        android:paddingRight="@dimen/activity_horizontal_margin" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/desc_text"
                         android:text="hace 4 horas"
-                        android:id="@+id/textView4"
+                        android:id="@+id/last_update"
                         android:textColor="@color/subtitle_white_text"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
 
                     <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
                         android:id="@+id/done_edit"
                         android:src="@drawable/ic_edit"
                         android:onClick="editDonePrice"
-                        android:layout_below="@+id/textView4"
-                        android:layout_toRightOf="@+id/textView3"
-                        android:layout_toEndOf="@+id/textView3" />
+                        android:layout_below="@+id/last_update"
+                        android:layout_toRightOf="@+id/product_price"
+                        android:layout_toEndOf="@+id/product_price" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.RecyclerView android:id="@+id/prices"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginRight="@dimen/short_margin"
+                android:layout_marginLeft="@dimen/short_margin"
                 />
 
         </LinearLayout>
