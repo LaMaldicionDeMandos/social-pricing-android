@@ -73,7 +73,8 @@
                         android:layout_centerHorizontal="true"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/extra_large_text"
-                        android:paddingRight="@dimen/activity_horizontal_margin" />
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:inputType="numberDecimal" />
 
                     <TextView
                         android:layout_width="wrap_content"
