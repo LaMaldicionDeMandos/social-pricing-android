@@ -107,6 +107,7 @@
         android:id="@+id/view"
         app:layout_anchor="@+id/toolbar"
         android:src="@drawable/barcode_scan_black"
+        android:onClick="scan"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         app:layout_anchorGravity="bottom|right|end" />
 

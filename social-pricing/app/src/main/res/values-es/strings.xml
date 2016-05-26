@@ -48,4 +48,10 @@
     <string name="new_title">Nuevo Negocio</string>
     <string name="panel_new_desc">Puedes agregar un Negocio tocando aquí.</string>
 
+    <string name="msg_camera_framework_bug">Lo sentimos, La camara Android encontró un problema. Necesita reiniciar el dispositivo.</string>
+    <string name="msg_default_status">Apunte al codigo de barras para escanearlo.</string>
+    <string name="msg_error">Error</string>
+    <string name="msg_invalid_value">Valor Invalido</string>
+    <string name="button_ok">OK</string>
+
 </resources>

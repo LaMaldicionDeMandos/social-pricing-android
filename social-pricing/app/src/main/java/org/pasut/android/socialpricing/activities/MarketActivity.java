@@ -2,6 +2,7 @@ package org.pasut.android.socialpricing.activities;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.api.client.util.Lists;
+import com.google.zxing.client.android.CaptureActivity;
 
 import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
@@ -28,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MarketActivity extends AppCompatActivity {
+    static final int SCAN_REQUEST = 1;
     private static final String TAG = MarketActivity.class.getSimpleName();
     public static final String MARKET = "market";
 
@@ -109,6 +112,11 @@ public class MarketActivity extends AppCompatActivity {
         changeToEditPrice(done);
     }
 
+    public void scan(View view) {
+        Intent intent = new Intent(this, CaptureActivity.class);
+        startActivityForResult(intent, SCAN_REQUEST);
+    }
+
     private void changeToEditPrice(boolean toEdit) {
         View label = findViewById(R.id.product_price);
         View edit = findViewById(R.id.product_price_edit);
@@ -125,6 +133,18 @@ public class MarketActivity extends AppCompatActivity {
         pricesView.setAdapter(adapter);
 
         pricesView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == SCAN_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Bar Code: " + data.getStringExtra("result"), Toast.LENGTH_LONG)
+                        .show();
+            }
+        }
     }
 
     static class PricesAdapter extends RecyclerView.Adapter<PricesAdapter.ViewHolder> {
