@@ -14,7 +14,7 @@
 
     <!-- Menu -->
     <string name="action_settings">Settings</string>
-    <string name="action_edit_product">EDIT PRODUCT</string>
+    <string name="action_edit_product">Edit product</string>
 
     <!-- Buttons -->
     <string name="search">SEARCH</string>

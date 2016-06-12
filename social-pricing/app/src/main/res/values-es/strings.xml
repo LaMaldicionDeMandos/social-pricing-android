@@ -14,7 +14,7 @@
 
     <!-- Menu -->
     <string name="action_settings">Configuración</string>
-    <string name="action_edit_product">EDITAR PRODUCTO</string>
+    <string name="action_edit_product">Editar producto</string>
 
     <!-- Buttons -->
     <string name="search">BUSCAR</string>
