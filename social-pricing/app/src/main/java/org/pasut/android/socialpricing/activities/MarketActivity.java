@@ -1,11 +1,14 @@
 package org.pasut.android.socialpricing.activities;
 
 import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -25,27 +28,19 @@ import com.google.zxing.client.android.CaptureActivity;
 
 import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
+import org.pasut.android.socialpricing.services.ProductService;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARKETS_EVENT;
 
 public class MarketActivity extends AppCompatActivity {
     static final int SCAN_REQUEST = 1;
     private static final String TAG = MarketActivity.class.getSimpleName();
     public static final String MARKET = "market";
 
-    private String[] prices = new String[]{
-            "a",
-            "a",
-            "a",
-            "a",
-            "a",
-            "a",
-            "a",
-            "a",
-            "a",
-            "a"
-    };
+    private String[] prices = new String[]{};
 
     private PricesAdapter adapter;
 
@@ -64,6 +59,8 @@ public class MarketActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setSubtitle(market.getAddress());
         populatePrices();
+        LocalBroadcastManager.getInstance(this).registerReceiver(productReceiver,
+                new IntentFilter(ProductService.FOUND_PRODUCT_EVENT));
     }
 
     @Override
@@ -141,11 +138,23 @@ public class MarketActivity extends AppCompatActivity {
         if (requestCode == SCAN_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Bar Code: " + data.getStringExtra("result"), Toast.LENGTH_LONG)
-                        .show();
+                scanCode(data.getStringExtra("result"));
             }
         }
     }
+
+    private void scanCode(final String code) {
+        Toast.makeText(this, "Bar Code: " + code, Toast.LENGTH_LONG)
+                .show();
+    }
+
+    private final BroadcastReceiver productReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+        Object data = intent.getExtras().getParcelableArrayList("data");
+        }
+    };
 
     static class PricesAdapter extends RecyclerView.Adapter<PricesAdapter.ViewHolder> {
         private final List<String> prices;
