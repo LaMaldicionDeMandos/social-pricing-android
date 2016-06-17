@@ -28,6 +28,7 @@ import com.google.zxing.client.android.CaptureActivity;
 
 import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
+import org.pasut.android.socialpricing.services.MarketService;
 import org.pasut.android.socialpricing.services.ProductService;
 
 import java.util.Arrays;
@@ -49,12 +50,17 @@ public class MarketActivity extends AppCompatActivity {
     private AnimatedVectorDrawable editToDone;
     private boolean done = false;
 
+    private Market market;
+
+    private ProductService productService;
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        productService = new ProductService(this);
         setContentView(R.layout.activity_market);
-        Market market = getIntent().getParcelableExtra(MARKET);
+        market = getIntent().getParcelableExtra(MARKET);
         this.setTitle(market.getName());
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setSubtitle(market.getAddress());
@@ -84,6 +90,15 @@ public class MarketActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(productReceiver);
+
+        productService.destroy();
+
+        super.onDestroy();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -146,6 +161,7 @@ public class MarketActivity extends AppCompatActivity {
     private void scanCode(final String code) {
         Toast.makeText(this, "Bar Code: " + code, Toast.LENGTH_LONG)
                 .show();
+        productService.search(code, market);
     }
 
     private final BroadcastReceiver productReceiver = new BroadcastReceiver() {
@@ -153,6 +169,7 @@ public class MarketActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
         Object data = intent.getExtras().getParcelableArrayList("data");
+        Toast.makeText(MarketActivity.this, "Arrive product " + data, Toast.LENGTH_SHORT).show();
         }
     };
 

@@ -11,6 +11,7 @@ import org.pasut.android.socialpricing.services.rest.AbstractRequest;
 import org.pasut.android.socialpricing.services.rest.MarketsByAddressRequest;
 import org.pasut.android.socialpricing.services.rest.MarketsByLocationRequest;
 import org.pasut.android.socialpricing.services.rest.SaveMarketRequest;
+import org.pasut.android.socialpricing.services.rest.SearchProductNearRequest;
 
 import java.util.List;
 
@@ -51,8 +52,14 @@ public class RestService {
         executeRequest(new SaveMarketRequest(protocol, host, port, market), listener);
     }
 
+    public void productsNear(final String code, final Market market, final RequestListener<Object> listener) {
+        executeRequest(new SearchProductNearRequest(protocol, host, port, code, market), listener);
+    }
+
     public void start(final Context context) {
-        spice.start(context);
+        if(!spice.isStarted()) {
+            spice.start(context);
+        }
     }
 
     public void shouldStop() {

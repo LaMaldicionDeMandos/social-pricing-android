@@ -21,20 +21,14 @@ import java.util.List;
 /**
  * Created by boot on 3/20/16.
  */
-public class MarketService {
+public class MarketService extends ModelService {
     private final static String TAG = MarketService.class.getSimpleName();
     public final static String LOCATION_SEARCH_EVENT = "location_event";
     public final static String FAVORITE_SEARCH_EVENT = "favorite_event";
     public final static String ARRIVE_MARKETS_EVENT = "arrive_markets_event";
 
-    private Context context;
-    private RestService restService;
-
     public MarketService(final Context context) {
-        SocialPriceApplication app = (SocialPriceApplication) context.getApplicationContext();
-        this.restService = app.getRestService();
-        this.restService.start(context);
-        this.context = Preconditions.checkNotNull(context);
+        super(context);
     }
 
     public void searchByAddress(final String address, final String locale) {
@@ -60,18 +54,6 @@ public class MarketService {
                 listener.onRequestSuccess(list);
             }
         });
-    }
-
-    private void sendList(final String event, List<Market> list) {
-        final Intent intent = new Intent(event);
-        intent.putParcelableArrayListExtra("data", (ArrayList<? extends Parcelable>) list);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-    }
-
-    public void destroy() {
-        this.context = null;
-        this.restService.shouldStop();
-        this.restService = null;
     }
 
     class MarketsListener implements RequestListener<List<Market>> {

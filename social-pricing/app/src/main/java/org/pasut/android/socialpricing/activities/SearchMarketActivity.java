@@ -220,6 +220,9 @@ public class SearchMarketActivity extends AppCompatActivity implements LocationL
                 Intent intent = new Intent(ARRIVE_MARKETS_EVENT);
                 intent.putParcelableArrayListExtra("data", new ArrayList<Market>());
                 LocalBroadcastManager.getInstance(SearchMarketActivity.this).sendBroadcast(intent);
+            } catch(Exception e) {
+                Log.e(TAG, "Not found location");
+                Toast.makeText(this, R.string.not_found_location, Toast.LENGTH_SHORT).show();
             }
         }
 

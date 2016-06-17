@@ -11,6 +11,7 @@
     <string name="no_market_search">No se encrontraron Mercados en tu busqueda, quieres agregar uno?\nTambién, puedes buscar uno con otro metodo.</string>
     <string name="search_by_address_explanation">Introduce la dirección incluida la altura y luego la localidad.</string>
     <string name="not_geo_permission">Se requiere permisos para usar geolocalizacón.</string>
+    <string name="not_found_location">No se encontró la localización, intente con otro metodo.</string>
 
     <!-- Menu -->
     <string name="action_settings">Configuración</string>
