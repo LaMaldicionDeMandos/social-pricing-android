@@ -52,6 +52,7 @@ public class MarketActivity extends AppCompatActivity {
     private boolean done = false;
 
     private Market market;
+    private ProductPackage product;
 
     private ProductService productService;
 
@@ -61,6 +62,7 @@ public class MarketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         productService = new ProductService(this);
         setContentView(R.layout.activity_market);
+        doneEdit = (ImageView)findViewById(R.id.done_edit);
         market = getIntent().getParcelableExtra(MARKET);
         this.setTitle(market.getName());
         getSupportActionBar().setElevation(0);
@@ -68,6 +70,7 @@ public class MarketActivity extends AppCompatActivity {
         populatePrices();
         LocalBroadcastManager.getInstance(this).registerReceiver(productReceiver,
                 new IntentFilter(ProductService.FOUND_PRODUCT_EVENT));
+        populateProduct(product);
     }
 
     @Override
@@ -148,6 +151,15 @@ public class MarketActivity extends AppCompatActivity {
         pricesView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    private void populateProduct(final ProductPackage product) {
+        if (product == null) {
+            doneEdit.setVisibility(View.INVISIBLE);
+        } else {
+            doneEdit.setVisibility(View.VISIBLE);
+            //TODO me falta popular todos los datos
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -169,8 +181,9 @@ public class MarketActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-        ProductPackage data = intent.getExtras().getParcelable("data");
-        Toast.makeText(MarketActivity.this, "Arrive product " + data, Toast.LENGTH_SHORT).show();
+            product = intent.getExtras().getParcelable("data");
+            populateProduct(product);
+            Toast.makeText(MarketActivity.this, "Arrive product " + product, Toast.LENGTH_SHORT).show();
         }
     };
 
