@@ -6,14 +6,15 @@ import com.google.api.client.http.HttpResponse;
 import com.google.api.client.json.gson.GsonFactory;
 
 import org.pasut.android.socialpricing.model.Market;
+import org.pasut.android.socialpricing.model.ProductPackage;
 
 /**
  * Created by boot on 4/28/16.
  */
-public class SearchProductNearRequest extends AbstractRequest<Object> {
+public class SearchProductNearRequest extends AbstractRequest<ProductPackage> {
     private final static String TEMPLATE = "product/%s/market/%s";
-    private final static Class<Object> getClazz() {
-        return Object.class;
+    private final static Class<ProductPackage> getClazz() {
+        return ProductPackage.class;
     }
 
     public SearchProductNearRequest(final String protocol, final String host, final int port,
@@ -22,7 +23,7 @@ public class SearchProductNearRequest extends AbstractRequest<Object> {
     }
 
     @Override
-    public Object loadDataFromNetwork() throws Exception {
+    public ProductPackage loadDataFromNetwork() throws Exception {
         HttpRequest request = getHttpRequestFactory()
                 .buildGetRequest(new GenericUrl(path));
         request.setParser(new GsonFactory().createJsonObjectParser());

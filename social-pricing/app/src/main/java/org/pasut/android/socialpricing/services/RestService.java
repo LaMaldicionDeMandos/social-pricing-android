@@ -7,6 +7,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
+import org.pasut.android.socialpricing.model.ProductPackage;
 import org.pasut.android.socialpricing.services.rest.AbstractRequest;
 import org.pasut.android.socialpricing.services.rest.MarketsByAddressRequest;
 import org.pasut.android.socialpricing.services.rest.MarketsByLocationRequest;
@@ -52,7 +53,8 @@ public class RestService {
         executeRequest(new SaveMarketRequest(protocol, host, port, market), listener);
     }
 
-    public void productsNear(final String code, final Market market, final RequestListener<Object> listener) {
+    public void productsNear(final String code, final Market market,
+                             final RequestListener<ProductPackage> listener) {
         executeRequest(new SearchProductNearRequest(protocol, host, port, code, market), listener);
     }
 

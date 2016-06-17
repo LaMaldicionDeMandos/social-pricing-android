@@ -28,6 +28,7 @@ import com.google.zxing.client.android.CaptureActivity;
 
 import org.pasut.android.socialpricing.R;
 import org.pasut.android.socialpricing.model.Market;
+import org.pasut.android.socialpricing.model.ProductPackage;
 import org.pasut.android.socialpricing.services.MarketService;
 import org.pasut.android.socialpricing.services.ProductService;
 
@@ -168,7 +169,7 @@ public class MarketActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-        Object data = intent.getExtras().getParcelableArrayList("data");
+        ProductPackage data = intent.getExtras().getParcelable("data");
         Toast.makeText(MarketActivity.this, "Arrive product " + data, Toast.LENGTH_SHORT).show();
         }
     };
