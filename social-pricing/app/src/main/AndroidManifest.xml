@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.pasut.android.socialpricing" >
+    package="org.pasut.android.socialpricing">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
-    <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
     <!-- TODO replace above two with next line after Android 4.2 -->
     <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
-    <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
-    <uses-feature android:name="android.hardware.screen.landscape"/>
-    <uses-feature android:name="android.hardware.touchscreen"/>
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.screen.landscape" />
+    <uses-feature android:name="android.hardware.touchscreen" />
 
     <application
         android:name=".SocialPriceApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activities.SearchMarketActivity"
-            android:launchMode="singleTop"
-            android:label="@string/market_search" >
+            android:label="@string/market_search"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:parentActivityName=".activities.SearchMarketActivity"
             android:name=".activities.MarketActivity"
-            android:label="@string/title_activity_market" >
-        </activity>
+            android:label="@string/title_activity_market"
+            android:parentActivityName=".activities.SearchMarketActivity" />
+        <activity
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:label="Scan"
+            android:parentActivityName=".activities.MarketActivity" />
 
-        <activity android:name="com.google.zxing.client.android.CaptureActivity"
-            android:parentActivityName=".activities.MarketActivity"
-            android:label="Scan"/>
+        <activity android:name=".activities.ProductFormActivity"
+            android:label="@string/new_product"></activity>
 
         <service
             android:name=".services.RestSpiceService"

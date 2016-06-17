@@ -1,16 +1,23 @@
 package org.pasut.android.socialpricing.activities;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +46,7 @@ import static org.pasut.android.socialpricing.services.MarketService.ARRIVE_MARK
 
 public class MarketActivity extends AppCompatActivity {
     static final int SCAN_REQUEST = 1;
+    static final int NEW_PRODUCT_REQUEST = 2;
     private static final String TAG = MarketActivity.class.getSimpleName();
     public static final String MARKET = "market";
 
@@ -64,6 +72,10 @@ public class MarketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_market);
         doneEdit = (ImageView)findViewById(R.id.done_edit);
         market = getIntent().getParcelableExtra(MARKET);
+        if (market == null) {
+            finish();
+            return;
+        }
         this.setTitle(market.getName());
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setSubtitle(market.getAddress());
@@ -94,6 +106,13 @@ public class MarketActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // Save its state
+        outState.putParcelable(MARKET, market);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -172,9 +191,13 @@ public class MarketActivity extends AppCompatActivity {
     }
 
     private void scanCode(final String code) {
-        Toast.makeText(this, "Bar Code: " + code, Toast.LENGTH_LONG)
-                .show();
         productService.search(code, market);
+    }
+
+    private void showNotFoundDialog() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        new NewProductDialogFragment().show(ft, "new Product Dialog");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
     }
 
     private final BroadcastReceiver productReceiver = new BroadcastReceiver() {
@@ -183,7 +206,9 @@ public class MarketActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             product = intent.getExtras().getParcelable("data");
             populateProduct(product);
-            Toast.makeText(MarketActivity.this, "Arrive product " + product, Toast.LENGTH_SHORT).show();
+            if (product == null) {
+                showNotFoundDialog();
+            }
         }
     };
 
@@ -219,6 +244,29 @@ public class MarketActivity extends AppCompatActivity {
                 super(itemView);
                 text = (TextView)itemView.findViewById(android.R.id.text1);
             }
+        }
+    }
+
+    public static class NewProductDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.not_found_product_title)
+                    .setMessage(R.string.not_found_product_desc)
+                    .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Intent intent = new Intent(getActivity(), ProductFormActivity.class);
+                            startActivityForResult(intent, NEW_PRODUCT_REQUEST);
+                        }
+                    })
+                    .setNegativeButton(R.string.discard, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).create();
         }
     }
 }

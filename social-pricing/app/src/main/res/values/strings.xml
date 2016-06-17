@@ -4,6 +4,7 @@
     <string name="app_name">Social Pricing</string>
     <string name="market_search">Search a Market</string>
     <string name="market_select">Pick one market</string>
+    <string name="new_product">New Product</string>
 
     <!-- Messages -->
     <string name="no_market_location">There is no Market in your location, do you want to add one?\nAlso, you can search it with another method.</string>
@@ -46,6 +47,9 @@
     <string name="search_by_search_title">Search by Address</string>
     <string name="search_by_search_desc">You can search a market from by address here.</string>
 
+    <string name="not_found_product_title">Product not found</string>
+    <string name="not_found_product_desc">Add the product to catalog?</string>
+
     <string name="new_title">Add new Market</string>
     <string name="panel_new_desc">You can add a market touching here.</string>
     <string name="title_activity_market">MarketActivity</string>
@@ -55,5 +59,6 @@
     <string name="msg_error">Error</string>
     <string name="msg_invalid_value">Invalid value</string>
     <string name="button_ok">OK</string>
+    <string name="title_activity_product_form">ProductFormActivity</string>
 
 </resources>
